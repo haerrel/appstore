@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html ng-app="AppStore">
+<head>
+<title>AppStore</title>
+<meta charset="utf-8">
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script
+	src="https://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
+<!--
+<link
+	href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="table.css" />
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+<script>
+var app = angular.module('AppStore', ['ui.bootstrap']);
+
+	function loadApps ($scope, $http){
+		$http({
+       		 method : 'GET',
+       		 url : 'http://localhost:8080/apps'
+    		}).then(function (response) {
+     			 $scope.apps = response.data;
+  		});
+  	}
+
+app.controller('AppStoreCtrl', function ($scope, $http, $dialog) {
+  	
+  	loadApps($scope, $http);
+  
+		  
+  	var addDialogOptions = {
+    	controller: 'AddAppCtrl',
+    	templateUrl: './appAdd.html'
+  	};
+  	
+  	$scope.add = function(app){
+    	$dialog.dialog(angular.extend(addDialogOptions, {})).open().then(function (){
+    	    loadApps($scope, $http);
+        }) ;
+  	};
+  	
+  	var editDialogOptions = {
+	    controller: 'EditAppCtrl',
+	    templateUrl: './appEdit.html',
+	};
+
+  	$scope.edit = function(app){
+   	 	var appToEdit = app;
+    	$dialog.dialog(angular.extend(editDialogOptions, {resolve: {app: angular.copy(appToEdit)}})).open().then(function (){
+    	    loadApps($scope, $http);
+        }) ;
+  	};
+		
+	$scope.delete = function(app) {
+		var deleteRequest = {
+			method : 'DELETE',
+			url : 'http://localhost:8080/apps/' + app.id
+		};
+		
+  		$http(deleteRequest).then(function() {
+			loadApps($scope, $http);
+		});
+  		//todo handle error
+	};
+});
+
+app.controller('AddAppCtrl', function($scope, $http, dialog){
+  
+  	$scope.save = function(App) {
+  		var postRequest = {
+    	method : 'POST',
+       	url : 'http://localhost:8080/apps/' ,
+       	data: {
+  				text: $scope.app.text,
+  				tags: $scope.app.tags,
+  				title: $scope.app.title
+			  }
+		}  
+		
+  		$http(postRequest).then(function (response) {
+  		    $scope.apps = response.data;
+  		}).then(function () {
+  			$scope.close();
+  		});
+  	};
+  
+  	$scope.close = function(){;
+    	dialog.close(undefined);
+  	};
+});
+
+app.controller('EditAppCtrl', function ($scope, $http, app, dialog) {
+  
+	$scope.app = app;
+
+  	$scope.save = function($app) {
+  	    var putRequest = {
+    	method : 'PUT',
+       	url : 'http://localhost:8080/apps/'+ $scope.app.id ,
+       	data: {
+  				text: $scope.app.text,
+  				tags: $scope.app.tags,
+  				title: $scope.app.title
+			  }
+		}  
+		
+  		$http(putRequest).then(function (response) {
+  		    $scope.apps = response.data;
+  		}).then(function () {
+			//todo handle error
+			$scope.close();
+		});
+  	};
+  
+  	$scope.close = function(){
+  		loadApps($scope, $http);
+    	dialog.close();
+  	};
+});
+
+
+</script>
+</head>
+<body>
+	<div ng-controller="AppStoreCtrl">
+		<h3>Apps:</h3>
+		<table class="mdl-data-table">
+			<tr>
+				<td class="mdl-data-table__cell--non-numeric" colspan=3>&nbsp;</td>
+				<td class="mdl-data-table__cell--non-numeric"><button
+						class="mdl-button" ng-click="add()">add App</button></td>
+			</tr>
+			<tr ng-repeat="app in apps">
+				<td class="mdl-data-table__cell--non-numeric">{{app.title}}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{app.text}}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{app.tags}}</td>
+				<td class="mdl-data-table__cell--non-numeric"><button
+						class="mdl-button" ng-click="edit(app)">edit</button>
+					<button class="mdl-button" ng-click="delete(app)">delete</button></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
