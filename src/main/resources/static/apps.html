@@ -70,7 +70,9 @@ app.controller('AppStoreCtrl', function ($scope, $http, $dialog) {
 	$scope.delete = function(app) {
 		var deleteRequest = {
 			method : 'DELETE',
-			url : 'http://localhost:8080/apps/' + app.id
+			url: (window.location.hostname === 'localhost' ?
+            'http://localhost:8080/apps/' + app.id:
+            'https://'+window.location.hostname + '/apps/' + app.id )
 		};
 		
   		$http(deleteRequest).then(function() {
@@ -86,7 +88,9 @@ app.controller('AddAppCtrl', function($scope, $http, dialog){
   	$scope.save = function(App) {
   		var postRequest = {
     	method : 'POST',
-       	url : 'http://localhost:8080/apps/' ,
+       	url: (window.location.hostname === 'localhost' ?
+            'http://localhost:8080/apps' :
+            'https://'+window.location.hostname + '/apps'),
        	data: {
   				text: $scope.app.text,
   				tags: $scope.app.tags,
@@ -113,7 +117,9 @@ app.controller('EditAppCtrl', function ($scope, $http, app, dialog) {
   	$scope.save = function($app) {
   	    var putRequest = {
     	method : 'PUT',
-       	url : 'http://localhost:8080/apps/'+ $scope.app.id ,
+       	url: (window.location.hostname === 'localhost' ?
+            'http://localhost:8080/apps/' + $scope.app.id:
+            'https://'+window.location.hostname + '/apps/' + $scope.app.id),
        	data: {
   				text: $scope.app.text,
   				tags: $scope.app.tags,
