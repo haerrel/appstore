@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/apps")
+@CrossOrigin
 public class AppController {
 
   @Autowired
