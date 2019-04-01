@@ -10,6 +10,7 @@ import javax.persistence.Id;
  * Model class persisted using JPA
  * 
  * @author Gudrun Socher
+ *
  * @version 1.0
  *
  */
