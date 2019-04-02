@@ -68,7 +68,7 @@ app.controller('AppStoreCtrl', function ($scope, $http, $dialog) {
 	$scope.delete = function(app) {
 		var deleteRequest = {
 			method : 'DELETE',
-			url: ('/apps' + app.id )
+			url: ('/apps/' + app.id )
 		};
 		
   		$http(deleteRequest).then(function() {
@@ -111,7 +111,7 @@ app.controller('EditAppCtrl', function ($scope, $http, app, dialog) {
   	$scope.save = function($app) {
   	    var putRequest = {
     	method : 'PUT',
-       	url: ('/apps' + $scope.app.id),
+       	url: ('/apps/' + $scope.app.id),
        	data: {
   				text: $scope.app.text,
   				tags: $scope.app.tags,
