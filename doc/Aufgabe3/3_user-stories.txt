@@ -1,0 +1,16 @@
+﻿UC1) Als Hochschulangehöriger möchte ich ein konsistentes Layout haben, um besser in dem Appstore zurecht zu finden
+UC2) Als Hochschulangehöriger möchte ich alle Apps mit dem selben Tag in einer Übersichtsseite dargestellt bekommen
+UC3) Als Hochschulangehöriger möchte ich eine Detailseite zu einer App anzeigen lassen können, um Informationen zur Software abzurufen.
+UC4) Als Hochschulangehöriger möchte ich eine Bewertung anhand von Sternen und ggf. einem Kommentar zu einer bestimmten Applikation einreichen können.
+
+UC5) Als Hochschulangehöriger möchte ich Applikationen erstellen können.
+
+UC6) Als Appbesitzer möchte ich über einen Löschen Button von mir erstellte Apps löschen können
+UC7) Als Appbesitzer möchte ich Informationen zur Software hinterlegen können.
+UC8) Als Appbesitzer möchte ich meine App mit einem oder mehreren Tags versehen.
+UC9) Als Appbesitzer möchte ich eine Information hinterlegen können, wo meine App verfügbar ist (z.B. Link)
+UC10) Als Appbesitzer möchte ich eine oder mehrere Abbildungen der Nutzeroberfläche hinzufügen können.
+UC10) Als Appbesitzer möchte ich über einen Bearbeiten Button nachträglich die App bearbeiten können.
+
+UC12) Als Hochschule möchte ich, dass nur Benutzer mit einem HM-Account (..@hm.edu) auf den Appstore zugriff haben
+UC13) Als Benutzer möchte ich mittels Shibboleth als Hochschulangehöriger authentifiziert/angemeldet werden
