@@ -27,7 +27,8 @@ public class AppController {
 
   @PostMapping
   public App create(@RequestBody App input) {
-    return appRepository.save(new App(input.getText(), input.getTags(), input.getTitle()));
+    App newApp = new App(input.getText(), input.getTags(), input.getTitle());
+    return appRepository.save(newApp);
   }
 
   @DeleteMapping("{id}")
