@@ -5,7 +5,7 @@ This guide is based on two examples to build REST services with Spring:
 - https://spring.io/guides/tutorials/bookmarks/
 - https://spring.io/guides/gs/rest-service/
 
-## Rest Enpoints secured
+## REST Enpoints secured
 
 based on https://ertan-toker.de/spring-boot-spring-security-jwt-token/ 
 
