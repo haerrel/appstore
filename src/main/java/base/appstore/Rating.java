@@ -26,17 +26,19 @@ public class Rating {
   private Double rating;
   private String text;
   private Long userId;
+  private Long appId;
 
 
   /**
    * Constructor used to initialize App object based on HTTP POST.
   */
-  public Rating(Long id, String datePublished, Double rating, String text, Long userId) {
+  public Rating(Long id, String datePublished, Double rating, String text, Long userId, Long appId) {
     this.id = id;
     this.datePublished = datePublished;
     this.rating = rating;
     this.text = text;
     this.userId = userId;
+    this.appId = appId;
   }
 
   public Long getId() {
@@ -77,5 +79,13 @@ public class Rating {
 
   public void setUserId(Long userId) {
     this.userId = userId;
+  }
+
+  public Long getAppId() {
+    return appId;
+  }
+
+  public void setAppId(Long appId) {
+    this.appId = appId;
   }
 }
