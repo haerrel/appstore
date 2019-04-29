@@ -31,7 +31,7 @@ public class AppController {
   ) {
     if (Objects.isNull(search) && Objects.isNull(filter) && Objects.isNull(tag) && Objects.isNull(limit)) {
           return appRepository.findAll();
-    g    }
+        }
 
         Stream<App> appStream = appRepository.findAll().stream();
         if (!Objects.isNull(search)) {
