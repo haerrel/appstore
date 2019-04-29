@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * App.
@@ -23,6 +26,8 @@ public class App {
   private String text;
   private String tags;
   private String title;
+  private Integer price;
+  private String datePublished;
 
   public App() {}
 
@@ -33,10 +38,12 @@ public class App {
    * @param tags Tags of an App as a list of strings.
    * @param title Title of an App.
    */
-  public App(String text, String tags, String title) {
+  public App(String text, String tags, String title, Integer price, String datePublished) {
     this.text = text;
     this.tags = tags;
     this.title = title;
+    this.price = price;
+    this.datePublished = datePublished;
   }
 
   public Long getId() {
@@ -56,7 +63,8 @@ public class App {
   }
 
   public String getTags() {
-    return tags;
+//    return Arrays.asList(tags.split(","));
+      return tags;
   }
 
   public void setTags(String tags) {
@@ -69,5 +77,25 @@ public class App {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public Integer getPrice() {
+    return price;
+  }
+
+  public void setPrice(Integer price) {
+    this.price = price;
+  }
+
+  public String getDatePublished() {
+    return datePublished;
+  }
+
+  public void setDatePublished(String datePublished) {
+    this.datePublished = datePublished;
+  }
+
+  public double getRating() {
+    return 0; //TODO
   }
 }
