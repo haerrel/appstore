@@ -26,7 +26,7 @@ public class AppController {
                        @RequestParam(required = false) Integer limit,
                        @RequestParam(required = false) String filter
   ) {
-    if (Objects.isNull(search) && Objects.isNull(filter) && Objects.isNull(tag) && Objects.isNull(tag)) {
+    if (Objects.isNull(search) && Objects.isNull(filter) && Objects.isNull(tag) && Objects.isNull(limit)) {
       return appRepository.findAll();
     }
 
