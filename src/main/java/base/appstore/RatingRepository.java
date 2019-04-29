@@ -9,6 +9,9 @@ import java.util.List;
 public interface RatingRepository extends JpaRepository<Rating, Long> {
 
     @Query("SELECT appId, userId FROM Rating WHERE appId = :appId and userId = :userId")
-    List<Rating> findByAppAndUserId(@Param("appId") Long appId, @Param("userId") Long userId);
+    List<Rating> findByAppIdAndUserId(@Param("appId") Long appId, @Param("userId") Long userId);
+
+    @Query("SELECT appId, userId FROM Rating WHERE appId = :appId")
+    List<Rating> findAllRatingsByAppId(@Param("appId") Long appId);
 
 }

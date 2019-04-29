@@ -93,9 +93,19 @@ public class AppController {
         });
     }
 
+    @GetMapping("/{id}/rating/")
+    public List<Rating> search(@PathVariable Long id) {
+        return ratingRepository.findAllRatingsByAppId(id);
+    }
+
     @GetMapping("/{id}/rating/{userID}")
-    public List<Rating> find(@PathVariable Long id, @PathVariable Long userID) {
-        return ratingRepository.findByAppAndUserId(id, userID);
+    public List<Rating> search(@PathVariable Long id, @PathVariable Long userID) {
+        return ratingRepository.findByAppIdAndUserId(id, userID);
+    }
+
+    @PostMapping("/rating")
+    public Rating create(@RequestBody Rating input) {
+        return ratingRepository.save(new Rating(input.getId(), input.getDatePublished(), input.getRating(), input.getText(), input.getUserId(), input.getAppId()));
     }
 
 }
