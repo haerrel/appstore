@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
+@SuppressWarnings("serial")
 public class JwtAuthentication implements Authentication {
     private final String token;
 

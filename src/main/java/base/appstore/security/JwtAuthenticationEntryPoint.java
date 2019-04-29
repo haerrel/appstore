@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 

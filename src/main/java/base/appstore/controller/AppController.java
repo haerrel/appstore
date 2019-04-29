@@ -49,7 +49,6 @@ public class AppController {
             return appRepository.save(app);
         }).orElseGet(() -> {
             input.setId(id);
-            ;
             return appRepository.save(input);
         });
     }

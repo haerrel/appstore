@@ -1,6 +1,5 @@
 package base.appstore.controller;
 
-
 import base.appstore.exception.EntityNotFoundException;
 import base.appstore.model.AuthenticationRequest;
 import base.appstore.model.JWTTokenResponse;

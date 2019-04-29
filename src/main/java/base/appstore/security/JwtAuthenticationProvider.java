@@ -17,7 +17,6 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     private final JwtTokenValidateService jwtService;
 
-    @SuppressWarnings("unused")
     public JwtAuthenticationProvider() {
         this(null);
     }

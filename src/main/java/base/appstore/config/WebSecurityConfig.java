@@ -1,6 +1,5 @@
 package base.appstore.config;
 
-
 import base.appstore.security.JwtAuthenticationEntryPoint;
 import base.appstore.security.JwtAuthenticationProvider;
 import base.appstore.security.JwtAuthenticationTokenFilter;
@@ -14,8 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
-@SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -44,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers("/login/**").permitAll()
+                .antMatchers("/*.html").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
