@@ -1,12 +1,15 @@
-
-# Beispielprojekt AppStore 
+# Example AppStore 
 
 This guide is based on two examples to build REST services with Spring:
 
 - https://spring.io/guides/tutorials/bookmarks/
 - https://spring.io/guides/gs/rest-service/
 
+## REST Enpoints secured
 
+based on https://ertan-toker.de/spring-boot-spring-security-jwt-token/ 
+
+Caution: tests are failing right now. JWT not yet included in tests.
 
 == What you'll build
 
