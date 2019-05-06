@@ -32,7 +32,7 @@ public class AppControllerAuthenticatedTest {
   public String doLogin() throws Exception{
     MockHttpServletResponse response = mockMvc
         .perform(post("/login")
-            .content("{\"username\": \"DemoAccount\",\"password\": \"DemoPassword\"}")
+            .content("{\"username\": \"DemoAdmin\",\"password\": \"DemoPassword\"}")
             .contentType(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(status().isOk()).andReturn().getResponse();
     JacksonJsonParser jsonParser = new JacksonJsonParser();
@@ -42,6 +42,7 @@ public class AppControllerAuthenticatedTest {
   @Test
   public void listAllTest() throws Exception {
     String token = doLogin();
+
     mockMvc.perform(get("/apps").header("Authorization", "Bearer " + token)).andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(content().string("[]"));

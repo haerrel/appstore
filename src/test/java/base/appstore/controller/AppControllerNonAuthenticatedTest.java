@@ -27,12 +27,7 @@ public class AppControllerNonAuthenticatedTest {
 
   @Test
   public void tryGet() throws Exception {
-    mockMvc.perform(get("/apps")).andExpect(status().isUnauthorized());
-  }
-
-  @Test
-  public void tryGetOne() throws Exception {
-    mockMvc.perform(get("/apps/1")).andExpect(status().isUnauthorized());
+    mockMvc.perform(get("/apps")).andExpect(status().isOk());
   }
 
   @Test

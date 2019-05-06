@@ -11,10 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountRepositoryLoader implements ApplicationListener<ApplicationReadyEvent> {
 
+    @Autowired
     private final AccountRepository accountRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
+    private final PasswordEncoder passwordEncoder;
+
     public AccountRepositoryLoader(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
         this.accountRepository = accountRepository;
         this.passwordEncoder = passwordEncoder;
@@ -23,11 +25,37 @@ public class AccountRepositoryLoader implements ApplicationListener<ApplicationR
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         this.accountRepository.deleteAll();
+        addDemoUser();
+        addDemoDeveloper();
+        addDemoAdmin();
+    }
+
+    private void addDemoUser(){
         Account account = new Account();
         account.setFirstname("Demo");
-        account.setLastname("Account");
-        account.setUsername("DemoAccount");
+        account.setLastname("User");
+        account.setUsername("DemoUser");
+        account.setRole(Role.USER);
+        account.setPassword(passwordEncoder.encode("DemoPassword"));
+        this.accountRepository.save(account);
+    }
+
+    private void addDemoDeveloper(){
+        Account account = new Account();
+        account.setFirstname("Demo");
+        account.setLastname("Developer");
+        account.setUsername("DemoDeveloper");
         account.setRole(Role.DEVELOPER);
+        account.setPassword(passwordEncoder.encode("DemoPassword"));
+        this.accountRepository.save(account);
+    }
+
+    private void addDemoAdmin(){
+        Account account = new Account();
+        account.setFirstname("Demo");
+        account.setLastname("Admin");
+        account.setUsername("DemoAdmin");
+        account.setRole(Role.ADMIN);
         account.setPassword(passwordEncoder.encode("DemoPassword"));
         this.accountRepository.save(account);
     }

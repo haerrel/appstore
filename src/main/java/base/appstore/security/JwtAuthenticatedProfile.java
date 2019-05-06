@@ -10,14 +10,27 @@ import java.util.Collection;
 public class JwtAuthenticatedProfile implements Authentication {
 
     private final String username;
+    private final String token;
+    private final Collection<? extends GrantedAuthority> authorities;
 
-    public JwtAuthenticatedProfile(String username) {
+    public JwtAuthenticatedProfile(String username, String token) {
+
         this.username = username;
+        this.token = token;
+        this.authorities = new ArrayList<>();
     }
+
+    public JwtAuthenticatedProfile(String username, String token, Collection<? extends GrantedAuthority> authorities) {
+
+        this.username = username;
+        this.token = token;
+        this.authorities = authorities;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+        return authorities;
     }
 
     @Override
@@ -50,3 +63,4 @@ public class JwtAuthenticatedProfile implements Authentication {
         return username;
     }
 }
+

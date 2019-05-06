@@ -1,13 +1,23 @@
 package base.appstore.security;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenValidateService {
@@ -19,21 +29,19 @@ public class JwtTokenValidateService {
     }
 
     public String getUsernameFromToken(String token) {
-        return getClaimFromToken(token, Claims::getSubject);
+
+        return getAllClaimsFromToken(token).getSubject();
     }
 
     public Date getExpirationDateFromToken(String token) {
-        return getClaimFromToken(token, Claims::getExpiration);
+
+        return getAllClaimsFromToken(token).getExpiration();
     }
 
-    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = getAllClaimsFromToken(token);
-        return claimsResolver.apply(claims);
-    }
-
-    private Claims getAllClaimsFromToken(String token) {
+    public Claims getAllClaimsFromToken(String token) {
+        final String base64secret = Base64.getEncoder().encodeToString(secret.getBytes());
         return Jwts.parser()
-                .setSigningKey(secret)
+                .setSigningKey(base64secret)
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -43,7 +51,24 @@ public class JwtTokenValidateService {
         return expiration.after(new Date());
     }
 
-    public Optional<Boolean> validateToken(String token) {
+
+    public Optional<Boolean> validateToken_opt(String token) {
         return isTokenNotExpired(token) ? Optional.of(Boolean.TRUE) : Optional.empty();
+    }
+
+    public Boolean validateToken(String token) {
+        return isTokenNotExpired(token);
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities(final String token) {
+
+        final Claims claims = getAllClaimsFromToken(token);
+
+        final Collection<? extends GrantedAuthority> authorities =
+                Arrays.stream(claims.get("role").toString().split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+
+        return authorities;
     }
 }
