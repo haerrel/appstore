@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <img class="img-fluid mr-4" style="float:left" src="https://via.placeholder.com/120" alt="card image">
+    <h4 class="card-title">{{app.title}}</h4>
+    <div>
+        <span class="fa fa-star checked" *ngFor="let item of [].constructor(3)"></span>
+        <span class="fa fa-star" *ngFor="let item of [].constructor(2)"></span>
+    </div>
+    <p class="card-text">{{app.text}}</p>
+    <div class="float-right">{{app.price}} €</div>
+  </div>
+</div>
