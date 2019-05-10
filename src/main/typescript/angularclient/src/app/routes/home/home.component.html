@@ -1,32 +1,39 @@
-<section class="pb-5">
-  <div class="container">
-    <h5 class="section-title h1">FAMOUS APPS</h5>
-    <div class="row">
-      <div class="col-md-4" *ngFor="let app of this.famousApps" >
-        <app-appcard [app]="app"></app-appcard>
-      </div>
+<div class="container-fluid">
+  <div class="m-3">
+    <h4 class="section-title h1">Beliebtesten Apps</h4>
+  </div>
+  <div class="row shadow m-3 bg-white rounded">
+    <div class="col-md-5" *ngFor="let app of this.famousApps">
+      <app-appcard [app]="app"></app-appcard>
     </div>
   </div>
-</section>
+</div>
 
-<section class="pb-5">
-  <div class="container">
-    <h5 class="section-title h1">NEWEST APPS</h5>
-    <div class="row">
-      <div class="col-md-4" *ngFor="let app of this.newestApps" >
-        <app-appcard [app]="app"></app-appcard>
-      </div>
+<div class="container-fluid">
+  <div class="m-3">
+    <h4 class="section-title h1">Neuesten Apps</h4>
+  </div>
+  <div class="row shadow m-3 bg-white rounded">
+    <div class="col-md-5" *ngFor="let app of this.newestApps">
+      <app-appcard [app]="app"></app-appcard>
     </div>
   </div>
-</section>
+</div>
 
-<section class="pb-5">
-  <div class="container">
-    <h5 class="section-title h1">CHEAPEST APPS</h5>
-    <div class="row">
-      <div class="col-md-4" *ngFor="let app of this.cheapestApps" >
-        <app-appcard [app]="app"></app-appcard>
-      </div>
+<div class="container-fluid">
+  <div class="m-3">
+    <h4 class="section-title h1">Teuersten Apps</h4>
+  </div>
+  <div class="row shadow m-3 bg-white rounded">
+    <div class="col-md-5" *ngFor="let app of this.cheapestApps">
+      <app-appcard [app]="app"></app-appcard>
     </div>
   </div>
-</section>
+</div>
+
+<!--
+<div class="shadow-none p-3 mb-5 bg-light rounded">No shadow</div>
+<div class="shadow-sm p-3 mb-5 bg-white rounded">Small shadow</div>
+<div class="shadow p-3 mb-5 bg-white rounded">Regular shadow</div>
+<div class="shadow-lg p-3 mb-5 bg-white rounded">Larger shadow</div>
+-->

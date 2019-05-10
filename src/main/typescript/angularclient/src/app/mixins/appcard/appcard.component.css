@@ -4,8 +4,11 @@
   color: orange;
 }
 
-/* SOURCE: https://bootsnipp.com/snippets/92xNm */
-/* FontAwesome for working BootSnippet :> */
+/*
+
+
+!* SOURCE: https://bootsnipp.com/snippets/92xNm *!
+!* FontAwesome for working BootSnippet :> *!
 
 #team {
   background: #eee !important;
@@ -112,8 +115,9 @@ section .section-title {
   transition: 1s;
   transform-style: preserve-3d;
 }
+*/
 
-.frontside .card,
+/*.frontside .card,
 .backside .card {
   min-height: 312px;
 }
@@ -126,10 +130,12 @@ section .section-title {
 .frontside .card .card-title,
 .backside .card .card-title {
   color: #007b5e !important;
-}
+}*/
 
+/*
 .frontside .card .card-body img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
 }
+*/
