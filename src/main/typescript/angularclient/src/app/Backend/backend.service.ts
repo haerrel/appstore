@@ -3,13 +3,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {App} from '../shared/app';
+import {environment} from "../environment/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  private endpoint = 'http://localhost:8080/';
+  private endpoint = environment.baseUrl;
 
   private httpOptions = {
     headers: new HttpHeaders({
