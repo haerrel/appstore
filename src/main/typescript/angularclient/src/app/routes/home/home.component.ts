@@ -16,13 +16,13 @@ export class HomeComponent implements OnInit {
   newestApps: App[] = [];
 
   ngOnInit() {
-    this.backend.getFamousApps(3).subscribe(res => {
+    this.backend.getFamousApps().subscribe(res => {
       this.famousApps = res;
     });
-    this.backend.getNewestApps(3).subscribe(res => {
+    this.backend.getNewestApps().subscribe(res => {
       this.newestApps = res;
     });
-    this.backend.getCheapestApps(3).subscribe(res => {
+    this.backend.getCheapestApps().subscribe(res => {
       this.cheapestApps = res;
     });
   }

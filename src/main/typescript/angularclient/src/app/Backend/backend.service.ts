@@ -20,15 +20,15 @@ export class BackendService {
 
   constructor(private http: HttpClient) { }
 
-  getFamousApps(limit: number = 6) {
+  getFamousApps(limit: number = 50) {
     return this.http.get<App[]>(this.endpoint + 'apps?filter=famous&limit=' + limit);
   }
 
-  getCheapestApps(limit: number = 6) {
+  getCheapestApps(limit: number = 50) {
     return this.http.get<App[]>(this.endpoint + 'apps?filter=cheapest&limit=' + limit);
   }
 
-  getNewestApps(limit: number = 6) {
+  getNewestApps(limit: number = 50) {
     return this.http.get<App[]>(this.endpoint + 'apps?filter=newest&limit=' + limit);
   }
 

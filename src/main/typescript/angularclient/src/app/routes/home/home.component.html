@@ -5,7 +5,7 @@
     <!-- Beliebtesten Apps -->
     <div class="d-flex flex-row align-items-center">
       <div class="flex-grow-1">
-        <a class="bg-transparent text-dark text-decoration-none" href="/apps?=famous">
+        <a class="bg-transparent text-dark text-decoration-none" href="/apps?filter=famous">
           <h3 class="font-weight-bold">Beliebtesten Apps</h3>
         </a>
       </div>
@@ -20,29 +20,29 @@
     <!-- Neuesten Apps -->
     <div class="d-flex flex-row align-items-center">
       <div class="flex-grow-1">
-        <a class="bg-transparent text-dark text-decoration-none" href="/apps?=newest">
+        <a class="bg-transparent text-dark text-decoration-none" href="/apps?filter=newest">
           <h3 class="font-weight-bold">Neuesten Apps</h3>
         </a>
       </div>
       <button type="button" class="btn btn-info">Mehr ansehen</button>
     </div>
     <div class="d-flex m-3 mb-5 shadow bg-light overflow-auto">
-      <div *ngFor="let app of this.famousApps">
+      <div *ngFor="let app of this.newestApps">
         <app-appcard [app]="app"></app-appcard>
       </div>
     </div>
 
-    <!-- Teuersten Apps -->
+    <!-- Günstigste Apps -->
     <div class="d-flex flex-row align-items-center">
       <div class="flex-grow-1">
-        <a class="bg-transparent text-dark text-decoration-none" href="/apps?=cheapest">
-          <h3 class="font-weight-bold">Teuersten Apps</h3>
+        <a class="bg-transparent text-dark text-decoration-none" href="/apps?filter=cheapest">
+          <h3 class="font-weight-bold">Günstigste Apps</h3>
         </a>
       </div>
       <button type="button" class="btn btn-warning">Mehr ansehen</button>
     </div>
     <div class="d-flex shadow m-3 bg-light overflow-auto">
-      <div *ngFor="let app of this.famousApps">
+      <div *ngFor="let app of this.cheapestApps">
         <app-appcard [app]="app"></app-appcard>
       </div>
     </div>
