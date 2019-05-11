@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BackendService} from './Backend/backend.service';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +13,5 @@ export class AppComponent {
   private apps: any;
 
   constructor() {}
-
-  ngOnInit() {
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-  }
 
 }

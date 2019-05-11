@@ -10,7 +10,7 @@ import {environment} from "../environment/environment";
 })
 export class BackendService {
 
-  private endpoint = 'https://app-hm.herokuapp.com/';
+  private endpoint = environment.baseUrl;
 
   private httpOptions = {
     headers: new HttpHeaders({
