@@ -1,66 +1,44 @@
 package base.appstore;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import org.hamcrest.Matchers;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
+
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(AppController.class)
 public class AppControllerTest {
+
+  @MockBean
+  private AppRepository appRepository;
+
+  @MockBean
+  private RatingRepository ratingRepository;
 
   @Autowired
   private MockMvc mockMvc;
-
-  private List<String> getApps() {
-    return List.of(
-        "{\"text\":\"Erste und neueste App\",\"tags\":\"neu,fancy\",\"title\":\"First App\",\"price\":1,\"datePublished\":\"2019-04-28\"}",
-        "{\"text\":\"Eine weitere App\",\"tags\":\"neu,fancy\",\"title\":\"First2 App\",\"price\":5,\"datePublished\":\"2019-04-29\"}",
-        "{\"text\":\"Zweite App\",\"tags\":\"2,fancy\",\"title\":\"Second App\",\"price\":2,\"datePublished\":\"2019-04-30\"}",
-        "{\"text\":\"Dritte App\",\"tags\":\"3,oldschool\",\"title\":\"Third App\",\"price\":3,\"datePublished\":\"2019-04-31\"}"
-    );
-  }
-
-  private void propagateApps() throws Exception {
-    for (String app : getApps()) {
-      mockMvc.perform(post("/apps")
-              .content(app)
-              .contentType(MediaType.APPLICATION_JSON_UTF8))
-              .andExpect(status().isOk());
-    }
-  }
 
   private MockHttpServletResponse getResponse(String URL) throws Exception {
      return mockMvc.perform(get(URL)).andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andReturn().getResponse();
-
-  }
-
-  private void verifyByTitle(JSONArray json, String... expected) throws JSONException {
-    for (int i = 0; i < json.length(); i++) {
-      Assert.assertEquals(expected[i], json.getJSONObject(i).get("title"));
-    }
 
   }
 
@@ -73,37 +51,68 @@ public class AppControllerTest {
 
   @Test
   public void listAllTestSearchParam() throws Exception {
-    propagateApps();
-    MockHttpServletResponse response = getResponse("/apps?search=First");
+    List<App> apps = Arrays.asList(new App(), new App(), new App(), new App(), new App());
+    apps.get(0).setTitle("WhatsApp");
+    apps.get(1).setTitle("ICQ");
+    apps.get(2).setTitle("WolframAlpha");
+    apps.get(3).setTitle("WolframAlpha2");
+    apps.get(4).setTitle("Facebook");
 
-    JSONArray json = new JSONArray(response.getContentAsString());
-    Assert.assertEquals(2, json.length());
-    verifyByTitle(json, "First App", "First2 App");
+    when(appRepository.findAll()).thenReturn(apps);
+
+    MockHttpServletResponse response = getResponse("/apps?search=W");
+    JSONArray actual = new JSONArray(response.getContentAsString());
+
+    Assert.assertEquals(3, actual.length());
+    int[] expected = new int[]{0, 2, 3};
+    for (int i = 0; i < actual.length(); i++) {
+      Assert.assertEquals(actual.getJSONObject(i).get("title"), apps.get(expected[i]).getTitle());
+    }
   }
 
   @Test
   public void listAllTestFilterParamCheapest() throws Exception {
-    propagateApps();
-    MockHttpServletResponse response = getResponse("/apps?filter=cheapest");
+    List<App> apps = Arrays.asList(new App(), new App(), new App(), new App());
+    apps.get(0).setPrice(10);
+    apps.get(1).setPrice(3);
+    apps.get(2).setPrice(0);
+    apps.get(3).setPrice(9);
 
-    JSONArray json = new JSONArray(response.getContentAsString());
-    Assert.assertEquals(4, json.length());
-    verifyByTitle(json, "First App", "Second App", "Third App", "First2 App");
+    when(appRepository.findAll()).thenReturn(apps);
+
+    MockHttpServletResponse response = getResponse("/apps?filter=cheapest");
+    JSONArray actual = new JSONArray(response.getContentAsString());
+
+    Assert.assertEquals(4, actual.length());
+    int[] expected = new int[]{2, 1, 3, 0};
+    for (int i = 0; i < actual.length(); i++) {
+      Assert.assertEquals(actual.getJSONObject(i).get("price"), apps.get(expected[i]).getPrice());
+    }
   }
 
   @Test
   public void listAllTestFilterParamNewest() throws Exception {
-    propagateApps();
-    MockHttpServletResponse response = getResponse("/apps?filter=newest");
+    List<App> apps = Arrays.asList(new App(), new App(), new App(), new App());
+    apps.get(0).setDatePublished("2019-01-01");
+    apps.get(1).setDatePublished("2014-04-04");
+    apps.get(2).setDatePublished("2016-03-25");
+    apps.get(3).setDatePublished("2016-02-26");
 
-    JSONArray json = new JSONArray(response.getContentAsString());
-    Assert.assertEquals(4, json.length());
-    verifyByTitle(json, "Third App", "Second App", "First2 App", "First App");
+    when(appRepository.findAll()).thenReturn(apps);
+
+    MockHttpServletResponse response = getResponse("/apps?filter=newest");
+    JSONArray actual = new JSONArray(response.getContentAsString());
+
+    Assert.assertEquals(4, actual.length());
+    int[] expected = new int[]{1, 3, 2, 0};
+    for (int i = 0; i < actual.length(); i++) {
+      Assert.assertEquals(actual.getJSONObject(i).get("datePublished"), apps.get(expected[i]).getDatePublished());
+    }
   }
 
   @Test
   public void listAllTestFilterParamFamous() throws Exception {
-    propagateApps();
+//    propagateApps();
     MockHttpServletResponse response = getResponse("/apps?filter=famous");
     //TODO not implemented yet
 //    JSONArray json = new JSONArray(response.getContentAsString());
@@ -113,7 +122,9 @@ public class AppControllerTest {
 
   @Test
   public void listAllTestLimitParam() throws Exception {
-    propagateApps();
+    List<App> apps = Arrays.asList(new App(), new App(), new App(), new App());
+    when(appRepository.findAll()).thenReturn(apps);
+
     MockHttpServletResponse response = getResponse("/apps?limit=2");
 
     JSONArray json = new JSONArray(response.getContentAsString());
@@ -122,69 +133,37 @@ public class AppControllerTest {
 
   @Test
   public void listAllTestTagParam() throws Exception {
-    propagateApps();
-    MockHttpServletResponse response = getResponse("/apps?tag=2");
+    List<App> apps = Arrays.asList(
+      new App("Populärer Instant Messenger", "IM,WhatsUp", "WhatsApp", 0, "2012-04-01"),
+      new App("Soziales Netzwerk", "Datenkracke,IM", "Facebook Messenger", 0, "2013-05-02"),
+      new App("Voice Chat Anwendung", "Realtime", "Google Hangouts", 0, "2015-08-12"),
+      new App("PDF Annotierer", "TeuerAberToll", "PDF Annotator", 10, "2018-01-01")
+    );
+    when(appRepository.findAll()).thenReturn(apps);
+
+    MockHttpServletResponse response = getResponse("/apps?tag=IM");
 
     JSONArray json = new JSONArray(response.getContentAsString());
     Assert.assertEquals(2, json.length());
-    verifyByTitle(json, "Second App");
+    assertThat("WhatsApp", Matchers.either(Matchers.is(json.getJSONObject(0).get("title"))).or(Matchers.is(json.getJSONObject(1).get("title"))));
+    assertThat("Facebook Messenger", Matchers.either(Matchers.is(json.getJSONObject(0).get("title"))).or(Matchers.is(json.getJSONObject(1).get("title"))));
   }
 
   @Test
-  public void createTest() throws Exception {
-    MockHttpServletResponse response = mockMvc
-        .perform(post("/apps")
-            .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
-            .contentType(MediaType.APPLICATION_JSON_UTF8))
-        .andExpect(status().isOk()).andReturn().getResponse();
-    char id = response.getContentAsString().charAt(6);
-    mockMvc.perform(delete("/apps/" + id));
-  }
+  public void listAllTestTagParamWithMultipleValues() throws Exception {
+    List<App> apps = Arrays.asList(
+      new App("Populärer Instant Messenger", "IM,WhatsUp", "WhatsApp", 0, "2012-04-01"),
+      new App("Soziales Netzwerk", "Datenkracke,IM", "Facebook Messenger", 0, "2013-05-02"),
+      new App("Voice Chat Anwendung", "Realtime", "Google Hangouts", 0, "2015-08-12"),
+      new App("PDF Annotierer", "TeuerAberToll", "PDF Annotator", 10, "2018-01-01")
+    );
+    when(appRepository.findAll()).thenReturn(apps);
 
-  
+    MockHttpServletResponse response = getResponse("/apps?tag=IM,Datenkracke");
 
-  @Test
-  public void findTest() throws Exception {
-    MockHttpServletResponse response = mockMvc
-        .perform(post("/apps")
-            .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
-            .contentType(MediaType.APPLICATION_JSON_UTF8))
-        .andExpect(status().isOk()).andReturn().getResponse();
-    char id = response.getContentAsString().charAt(6);
-    mockMvc.perform(get("/apps/" + id)).andExpect(status().isOk());
-    mockMvc.perform(delete("/apps/" + id));
-  }
-
-  @Test
-  public void deleteTest() throws Exception {
-    MockHttpServletResponse response = mockMvc
-        .perform(post("/apps")
-            .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
-            .contentType(MediaType.APPLICATION_JSON_UTF8))
-        .andExpect(status().isOk()).andReturn().getResponse();
-    char id = response.getContentAsString().charAt(6);
-    mockMvc.perform(delete("/apps/" + id)).andExpect(status().isOk());
-  }
-
-  @Test
-  public void updateTest() throws Exception {
-    MockHttpServletResponse response = mockMvc
-        .perform(post("/apps")
-            .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
-            .contentType(MediaType.APPLICATION_JSON_UTF8))
-        .andExpect(status().isOk()).andReturn().getResponse();
-    char id = response.getContentAsString().charAt(6);
-    mockMvc.perform(put("/apps/" + id)
-        .content("{\"title\":\"TestTest\",\"text\":\"test test\",\"tags\":\"test\"}")
-        .contentType("application/json")).andExpect(status().isOk());
-    mockMvc.perform(delete("/app/" + id));
-  }
-
-  @Test
-  public void updateTestFailed() throws Exception {
-    mockMvc.perform(put("/apps/" + 0)
-        .content("{\"title\":\"TestTest\",\"text\":\"test test\",\"tags\":\"test\"}")
-        .contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk());
+    JSONArray json = new JSONArray(response.getContentAsString());
+    Assert.assertEquals(1, json.length());
+    Assert.assertEquals("Facebook Messenger", json.getJSONObject(0).get("title"));
   }
 
 }
