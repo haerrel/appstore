@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light d-flex flex-row">
+<!--<header class="navbar navbar-light d-flex flex-row" style="background-color: #64b5f6 !important;">
   <div class="align-middle">
     <span class="fa fa-university fa-2x mr-2"></span>
     <a class="navbar-brand">Apps@HM</a>
@@ -6,12 +6,58 @@
 
   <div class="d-flex flex-row w-50">
     <input class="form-control w-100 mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
   </div>
 
   <div>
     <a class="navbar-brand mr-2">%USERNAME%</a>
     <span class="fa fa-user fa-2x"></span>
   </div>
+</header>
+-->
 
-</nav>
+<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bg-info">
+  <a class="navbar-brand">Apps@HM</a>
+  <a class="navbar-brand mr-0 mr-md-2 fa" href="/" aria-label="Apps@HM">
+    <span class="fa fa-university fa-2x text-dark"></span>
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link " href="/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Bootstrap');">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/someOtherPath"
+           onclick="ga('send', 'event', 'Navbar', 'Community links', 'Docs');">Apps</a>
+      </li>
+      <!--
+      <li class="nav-item">
+        <a class="nav-link " href="/docs/4.0/examples/"
+           onclick="ga('send', 'event', 'Navbar', 'Community links', 'Examples');">Examples</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://themes.getbootstrap.com/"
+           onclick="ga('send', 'event', 'Navbar', 'Community links', 'Themes');" target="_blank"
+           rel="noopener">Themes</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="https://expo.getbootstrap.com/"
+           onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');" target="_blank" rel="noopener">Expo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://blog.getbootstrap.com/"
+           onclick="ga('send', 'event', 'Navbar', 'Community links', 'Blog');" target="_blank" rel="noopener">Blog</a>
+      </li>-->
+    </ul>
+  </div>
+
+  <div class="d-flex flex-row w-50 m-md-auto">
+    <input class="form-control w-100 mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+  </div>
+
+  <a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+     href="https://github.com/twbs/bootstrap/archive/v4.0.0.zip">Download</a>
+</header>

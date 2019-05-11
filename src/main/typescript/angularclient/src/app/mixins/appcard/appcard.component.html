@@ -1,26 +1,24 @@
-<div class="m-4 d-flex flex-row shadow-sm h-75" style="max-width: 300px">
+<div class="m-4 d-flex flex-row shadow-sm h-75" style="width: 380px">
   <div class="col d-flex">
-    <img class="m-auto rounded-circle" src="https://via.placeholder.com/100" alt="card image">
+    <img class="m-auto rounded-circle" src="https://via.placeholder.com/110" alt="card image">
   </div>
+
   <div class="col d-flex flex-column">
-    <div class="m-auto">
-      <div class="row">
-        <h4 class="card-titles">{{app.title}}</h4>
-      </div>
-
-      <div class="row">
-        <span class="fa fa-star checked" *ngFor="let item of [].constructor(3)"></span>
-        <span class="fa fa-star" *ngFor="let item of [].constructor(2)"></span>
-      </div>
-
-      <div class="row">
-        <p class="card-text">{{app.text}}</p>
-      </div>
-
-      <div class="row">
-        <div class="float-right">{{app.price}} €</div>
-      </div>
+    <div>
+      <h4 class="card-titles">{{app.title}}</h4>
     </div>
 
+    <div class="w-100">
+      <span class="fa fa-star checked" *ngFor="let item of [].constructor(3)"></span>
+      <span class="fa fa-star" *ngFor="let item of [].constructor(2)"></span>
+    </div>
+
+    <div class="w-100">
+      <p class="card-text">{{app.text}}</p>
+    </div>
+
+    <div class="w-100">
+      <div>{{app.price}} €</div>
+    </div>
   </div>
 </div>
