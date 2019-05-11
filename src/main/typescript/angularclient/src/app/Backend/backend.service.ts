@@ -9,7 +9,8 @@ import {App} from '../shared/app';
 })
 export class BackendService {
 
-  private endpoint = 'http://localhost:8080/';
+  //private endpoint = 'http://localhost:8080/';
+  private endpoint = 'https://app-hm.herokuapp.com/';
 
   private httpOptions = {
     headers: new HttpHeaders({
