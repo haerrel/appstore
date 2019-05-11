@@ -1,13 +1,9 @@
 package base.appstore;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,11 +33,11 @@ public class AppController {
         if (!Objects.isNull(search)) {
             appStream = appStream.filter(app -> app.getTitle().startsWith(search));
         }
-        if (!Objects.isNull(tag)) {
+        if (!Objects.isNull(tag) && !tag.isEmpty()) {
             appStream = appStream.filter(app -> {
-                List<String> tags = Arrays.asList(app.getTags().split(","));
-                tags.retainAll(tag); //TODO throws exception
-                return !tags.isEmpty();
+                List<String> appTags = new ArrayList<>(Arrays.asList(app.getTags().split(",")));
+                appTags.retainAll(tag);
+                return appTags.size() == tag.size();
             });
         }
         if (!Objects.isNull(filter)) {
