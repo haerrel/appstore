@@ -2,8 +2,8 @@
   <div class="m-3">
     <h4 class="section-title h1">Beliebtesten Apps</h4>
   </div>
-  <div class="row shadow m-3 bg-white rounded">
-    <div class="col-md-5" *ngFor="let app of this.famousApps">
+  <div class="d-flex shadow m-3 bg-white rounded">
+    <div *ngFor="let app of this.famousApps">
       <app-appcard [app]="app"></app-appcard>
     </div>
   </div>
@@ -13,8 +13,8 @@
   <div class="m-3">
     <h4 class="section-title h1">Neuesten Apps</h4>
   </div>
-  <div class="row shadow m-3 bg-white rounded">
-    <div class="col-md-5" *ngFor="let app of this.newestApps">
+  <div class="d-flex shadow m-3 bg-white rounded">
+    <div *ngFor="let app of this.newestApps">
       <app-appcard [app]="app"></app-appcard>
     </div>
   </div>
@@ -24,8 +24,8 @@
   <div class="m-3">
     <h4 class="section-title h1">Teuersten Apps</h4>
   </div>
-  <div class="row shadow m-3 bg-white rounded">
-    <div class="col-md-5" *ngFor="let app of this.cheapestApps">
+  <div class="d-flex shadow m-3 bg-white rounded">
+    <div *ngFor="let app of this.cheapestApps">
       <app-appcard [app]="app"></app-appcard>
     </div>
   </div>
