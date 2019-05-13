@@ -1,5 +1,6 @@
 package base.appstore;
 
+import base.appstore.model.App;
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.reflection.impl.PojoClassFactory;
 import com.openpojo.validation.Validator;

@@ -1,5 +1,6 @@
-package base.appstore;
+package base.appstore.repository;
 
+import base.appstore.model.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

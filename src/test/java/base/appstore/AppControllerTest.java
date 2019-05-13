@@ -1,5 +1,9 @@
 package base.appstore;
 
+import base.appstore.controller.AppController;
+import base.appstore.model.App;
+import base.appstore.repository.AppRepository;
+import base.appstore.repository.RatingRepository;
 import org.hamcrest.Matchers;
 import org.json.JSONArray;
 import org.junit.Assert;

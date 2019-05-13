@@ -1,4 +1,4 @@
-package base.appstore;
+package base.appstore.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

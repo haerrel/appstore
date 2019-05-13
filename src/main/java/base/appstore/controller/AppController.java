@@ -1,5 +1,9 @@
-package base.appstore;
+package base.appstore.controller;
 
+import base.appstore.repository.AppRepository;
+import base.appstore.model.Rating;
+import base.appstore.repository.RatingRepository;
+import base.appstore.model.App;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
