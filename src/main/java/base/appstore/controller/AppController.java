@@ -1,5 +1,6 @@
 package base.appstore.controller;
 
+import base.appstore.exception.AppNotFoundException;
 import base.appstore.repository.AppRepository;
 import base.appstore.model.Rating;
 import base.appstore.repository.RatingRepository;
