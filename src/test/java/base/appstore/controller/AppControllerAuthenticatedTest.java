@@ -67,7 +67,7 @@ public class AppControllerAuthenticatedTest {
     String token = doLogin();
     MockHttpServletResponse response = mockMvc
         .perform(post("/apps").header("Authorization", "Bearer " + token)
-            .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
+            .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\": [{\"tag\":\"test1\"}, {\"tag\":\"test2\"}]}")
             .contentType(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(status().isOk()).andReturn().getResponse();
     char id = response.getContentAsString().charAt(6);
