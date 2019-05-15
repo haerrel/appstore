@@ -9,7 +9,7 @@ This guide is based on two examples to build REST services with Spring:
 
 based on https://ertan-toker.de/spring-boot-spring-security-jwt-token/ 
 
-Caution: tests are failing right now. JWT not yet included in tests.
+Added Role based authentication: roles are ROLE_DEVELOPER, ROLE_ADMIN
 
 == What you'll build
 
