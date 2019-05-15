@@ -51,7 +51,7 @@ public class AppController {
                     .orElseGet(() -> {return tagRepository.save(tag);});
 
             newApp.getTags().add(savedTag);
-            //savedTag.getApps().add(newApp);
+            savedTag.getApps().add(newApp);
         }
         return appRepository.save(newApp);
     }

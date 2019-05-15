@@ -13,7 +13,8 @@ public class Tag {
     private Long id;
     private String text;
 
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL)
     //avoid the infinite recursion in the JSON responses
     @JsonBackReference
     private Set<App> apps = new HashSet<>();
@@ -44,4 +45,6 @@ public class Tag {
     public void setApps(Set<App> apps) {
         this.apps = apps;
     }
+
+
 }
