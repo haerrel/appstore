@@ -30,7 +30,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) {
 
         try {
             String token = (String) authentication.getCredentials();
@@ -39,7 +39,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
             authorities = jwtService.getAuthorities(token);
 
             return jwtService.validateTokenOpt(token)
-                    .map(aBoolean -> new JwtAuthenticatedProfile(username,token, authorities))
+                    .map(aBoolean -> new JwtAuthenticatedProfile(username, authorities))
                     .orElseThrow(() -> new JwtAuthenticationException("JWT Token validation failed"));
 
         } catch (JwtException ex) {

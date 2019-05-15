@@ -54,7 +54,7 @@ public class JwtTokenValidateService {
         return isTokenNotExpired(token);
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities(final String token) {
+    public Collection<GrantedAuthority> getAuthorities(final String token) {
         final Claims claims = getAllClaimsFromToken(token);
         return Arrays.stream(claims.get("role").toString().split(","))
                 .map(SimpleGrantedAuthority::new)
