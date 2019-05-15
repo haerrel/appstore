@@ -70,7 +70,6 @@ public class AppController {
             app.setId(id);
             app.setTitle(input.getTitle());
             app.setText(input.getText());
-
             app.setTags(input.getTags());
             return appRepository.save(app);
         }).orElseGet(() -> {

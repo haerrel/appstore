@@ -52,12 +52,12 @@ public class AppControllerAuthenticatedTest {
         String token = doLogin();
         MockHttpServletResponse response = mockMvc
                 .perform(post("/apps").header("Authorization", "Bearer " + token)
-                        .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\": [{\"text\":\"test1\"}, {\"text\":\"test2\"}]}")
+                        .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\": []}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk()).andReturn().getResponse();
         char id = response.getContentAsString().charAt(6);
         mockMvc.perform(put("/apps/" + id).header("Authorization", "Bearer " + token)
-                .content("{\"title\":\"TestTest\",\"text\":\"test test test\",\"tags\": []}")
+                .content("{\"title\":\"TestTest\",\"text\":\"test test test\",\"tags\": [{\"text\":\"test1\"}]}")
                 .contentType("application/json"));
         mockMvc.perform(delete("/apps/" + id).header("Authorization", "Bearer " + token));
     }
