@@ -13,12 +13,6 @@ public class JwtAuthenticatedProfile implements Authentication {
     private final Collection<? extends GrantedAuthority> authorities;
     private boolean authenticated = true;
 
-    public JwtAuthenticatedProfile(String username) {
-
-        this.username = username;
-        this.authorities = new ArrayList<>();
-    }
-
     public JwtAuthenticatedProfile(String username, Collection<? extends GrantedAuthority> authorities) {
 
         this.username = username;
