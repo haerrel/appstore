@@ -2,7 +2,6 @@ package base.appstore.security;
 
 
 import base.appstore.exception.JwtAuthenticationException;
-import com.sun.javafx.scene.control.behavior.OptionalBoolean;
 import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
