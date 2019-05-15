@@ -12,6 +12,7 @@ public class JwtAuthenticatedProfile implements Authentication {
     private final String username;
     private final String token;
     private final Collection<? extends GrantedAuthority> authorities;
+    private boolean authenticated = true;
 
     public JwtAuthenticatedProfile(String username, String token) {
 
@@ -50,17 +51,15 @@ public class JwtAuthenticatedProfile implements Authentication {
 
     @Override
     public boolean isAuthenticated() {
-        return true;
+        return authenticated;
     }
 
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-
+        this.authenticated = isAuthenticated;
     }
 
     @Override
-    public String getName() {
-        return username;
-    }
+    public String getName() { return this.username; }
 }
 

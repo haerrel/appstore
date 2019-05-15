@@ -47,8 +47,8 @@ public class AppController {
         while (tagIterator.hasNext()) {
             Tag tag = tagIterator.next();
             Tag savedTag = tagRepository.findOneByText(tag.getText())
-                    .map((existingTag) -> {existingTag.getApps().add(newApp); return existingTag;})
-                    .orElseGet(() -> {return tagRepository.save(tag);});
+                    .map(existingTag -> {existingTag.getApps().add(newApp); return existingTag;})
+                    .orElseGet(() -> tagRepository.save(tag));
 
             newApp.getTags().add(savedTag);
             savedTag.getApps().add(newApp);

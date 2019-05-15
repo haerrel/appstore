@@ -38,7 +38,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
             Collection<? extends GrantedAuthority> authorities;
             authorities = jwtService.getAuthorities(token);
 
-            return jwtService.validateToken_opt(token)
+            return jwtService.validateTokenOpt(token)
                     .map(aBoolean -> new JwtAuthenticatedProfile(username,token, authorities))
                     .orElseThrow(() -> new JwtAuthenticationException("JWT Token validation failed"));
 
