@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BackendService} from './Backend/backend.service';
+import {BackendService} from './services/Backend/backend.service';
 
 @Component({
   selector: 'app-root',
