@@ -38,7 +38,7 @@
     <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
   </div>
 
-  <div *ngIf="authService.isLoggedIn(); else login">
+  <div *ngIf="isLoggedIn(); else login">
     <!-- TODO implement dropdown like
     |-------------------|
     |           Username|
@@ -50,8 +50,8 @@
     |                   |
     |                   |
     -->
-    {{authService.getUsername()}}
-    <div class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" (click)="authService.logout()">
+    {{getUsername()}}
+    <div class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" (click)="logout()">
       Logout
     </div>
   </div>
