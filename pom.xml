@@ -5,7 +5,7 @@
 
 	<groupId>edu.hm.cs.swa</groupId>
 	<artifactId>appstoreexample</artifactId>
-	<version>0.42.0</version>
+	<version>0.42.1</version>
 	<name>AppStore (swaproject-example)</name>
 
 	<parent>
