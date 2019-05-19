@@ -4,8 +4,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -44,7 +46,7 @@ public class JwtTokenValidateService {
     }
 
 
-    public Optional<Boolean> validateToken_opt(String token) {
+    public Optional<Boolean> validateTokenOpt(String token) {
         return isTokenNotExpired(token) ? Optional.of(Boolean.TRUE) : Optional.empty();
     }
 
@@ -52,15 +54,11 @@ public class JwtTokenValidateService {
         return isTokenNotExpired(token);
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities(final String token) {
-
+    public Collection<GrantedAuthority> getAuthorities(final String token) {
         final Claims claims = getAllClaimsFromToken(token);
+        return Arrays.stream(claims.get("role").toString().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
 
-        final Collection<? extends GrantedAuthority> authorities =
-                Arrays.stream(claims.get("role").toString().split(","))
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toList());
-
-        return authorities;
     }
 }

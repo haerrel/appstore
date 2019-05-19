@@ -1,4 +1,4 @@
-package base.appstore;
+package base.appstore.model;
 
 import base.appstore.model.App;
 import com.openpojo.reflection.PojoClass;

@@ -3,27 +3,18 @@ package base.appstore.security;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 @SuppressWarnings("serial")
 public class JwtAuthenticatedProfile implements Authentication {
 
     private final String username;
-    private final String token;
     private final Collection<? extends GrantedAuthority> authorities;
+    private boolean authenticated = true;
 
-    public JwtAuthenticatedProfile(String username, String token) {
-
-        this.username = username;
-        this.token = token;
-        this.authorities = new ArrayList<>();
-    }
-
-    public JwtAuthenticatedProfile(String username, String token, Collection<? extends GrantedAuthority> authorities) {
+    public JwtAuthenticatedProfile(String username, Collection<? extends GrantedAuthority> authorities) {
 
         this.username = username;
-        this.token = token;
         this.authorities = authorities;
     }
 
@@ -50,17 +41,15 @@ public class JwtAuthenticatedProfile implements Authentication {
 
     @Override
     public boolean isAuthenticated() {
-        return true;
+        return authenticated;
     }
 
     @Override
-    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-
+    public void setAuthenticated(boolean isAuthenticated){
+        this.authenticated = isAuthenticated;
     }
 
     @Override
-    public String getName() {
-        return username;
-    }
+    public String getName() { return this.username; }
 }
 

@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +29,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) {
 
         try {
             String token = (String) authentication.getCredentials();
@@ -38,8 +37,8 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
             Collection<? extends GrantedAuthority> authorities;
             authorities = jwtService.getAuthorities(token);
 
-            return jwtService.validateToken_opt(token)
-                    .map(aBoolean -> new JwtAuthenticatedProfile(username,token, authorities))
+            return jwtService.validateTokenOpt(token)
+                    .map(aBoolean -> new JwtAuthenticatedProfile(username, authorities))
                     .orElseThrow(() -> new JwtAuthenticationException("JWT Token validation failed"));
 
         } catch (JwtException ex) {

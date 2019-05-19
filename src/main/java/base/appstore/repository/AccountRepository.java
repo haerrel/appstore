@@ -1,7 +1,7 @@
 package base.appstore.repository;
 
-import base.appstore.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
+import base.appstore.model.Account;
 
 import java.util.Optional;
 
