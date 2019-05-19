@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './routes/root/home/home.component';
-import { HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppcardComponent } from './mixins/appcard/appcard.component';
 import { LoginComponent } from './routes/login/login.component';
 import { RootComponent } from './routes/root/root.component';
+import {AuthInterceptor} from './services/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,13 @@ import { RootComponent } from './routes/root/root.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
