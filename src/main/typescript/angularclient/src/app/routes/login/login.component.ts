@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
 
-import {ToastrService} from "ngx-toastr";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -29,16 +29,21 @@ export class LoginComponent implements OnInit {
         loginPromise = this.service.login('DemoDeveloper', 'DemoPassword');
         break;
       case 'FORM':
-        loginPromise = this.service.login(this.username, this.password);
+        if (this.username && this.password) {
+          loginPromise = this.service.login(this.username, this.password);
+        }
+        break;
     }
-    loginPromise
-      .then(() => {
-        this.toastr.success("You´ve successfully logged in!", "Login");
-        this.router.navigateByUrl('/apps');
-      })
-      .catch((err) => {
-        this.toastr.error("Your login was invalid!", "Login")
-      });
+    if (loginPromise) {
+      loginPromise
+        .then(() => {
+          this.toastr.success('You´ve successfully logged in!', 'Login');
+          this.router.navigateByUrl('/apps');
+        })
+        .catch((err) => {
+          this.toastr.error('Your login was invalid!', 'Login');
+        });
+    }
   }
 
 }
