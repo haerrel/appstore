@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
 
+import {ToastrService} from "ngx-toastr";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
   private username: string;
   private password: string;
 
-  constructor(private service: AuthService, private router: Router) { }
+  constructor(private service: AuthService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -31,12 +33,11 @@ export class LoginComponent implements OnInit {
     }
     loginPromise
       .then(() => {
-        // TODO some UX feedback that you´ve successfully logged in
-        this.router.navigateByUrl('/');
+        this.toastr.success("You´ve successfully logged in!", "Login");
+        this.router.navigateByUrl('/apps');
       })
-      .catch(err => {
-        // TODO some UX feedback that your login was invalid
-        console.log('invalid login');
+      .catch((err) => {
+        this.toastr.error("Your login was invalid!", "Login")
       });
   }
 

@@ -10,6 +10,8 @@ import { AppcardComponent } from './mixins/appcard/appcard.component';
 import { LoginComponent } from './routes/login/login.component';
 import { RootComponent } from './routes/root/root.component';
 import {AuthInterceptor} from './services/auth/auth.interceptor';
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {AuthInterceptor} from './services/auth/auth.interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {
