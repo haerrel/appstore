@@ -46,7 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/*.*").permitAll()
-                //.anyRequest().permitAll();
                 .antMatchers(HttpMethod.GET, "/apps/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/apps/**").permitAll() // required by angular http client (interceptor)
                 .anyRequest().authenticated();

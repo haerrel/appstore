@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * App.
@@ -23,7 +21,7 @@ public class Rating {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String datePublished;
-  private Double rating;
+  private Double value;
   private String text;
   private Long userId;
   private Long appId;
@@ -35,7 +33,7 @@ public class Rating {
   public Rating(Long id, String datePublished, Double rating, String text, Long userId, Long appId) {
     this.id = id;
     this.datePublished = datePublished;
-    this.rating = rating;
+    this.value = rating;
     this.text = text;
     this.userId = userId;
     this.appId = appId;
@@ -66,11 +64,11 @@ public class Rating {
   }
 
   public Double getRating() {
-    return rating;
+    return value;
   }
 
   public void setRating(Double rating) {
-    this.rating = rating;
+    this.value = rating;
   }
 
   public Long getUserId() {

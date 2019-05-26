@@ -1,12 +1,14 @@
-package base.appstore;
+package base.appstore.model;
 
-public enum Role {
-    ADMIN("DemoAdmin","DemoPassword");
+public enum PredefinedUser {
+    ADMIN("DemoAdmin","DemoPassword"),
+    DEVELOPER("DemoDeveloper","DemoPassword"),
+    USER("DemoUser","DemoPassword");
 
     private final String username;
     private final String password;
 
-    Role(String username, String password) {
+    PredefinedUser(String username, String password) {
         this.username = username;
         this.password = password;
     }

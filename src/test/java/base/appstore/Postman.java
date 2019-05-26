@@ -1,5 +1,6 @@
 package base.appstore;
 
+import base.appstore.model.PredefinedUser;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -7,7 +8,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class Postman {
@@ -36,11 +36,11 @@ public class Postman {
         return new Postman(MockMvcRequestBuilders.put(urlTemplate), mockMvc);
     }
 
-    public MockHttpServletRequestBuilder as(Role role) throws Exception {
+    public MockHttpServletRequestBuilder as(PredefinedUser role) throws Exception {
         return this.builder.header("Authorization", "Bearer " + getToken(role));
     }
 
-    private String getToken(Role role) throws Exception {
+    private String getToken(PredefinedUser role) throws Exception {
         MockHttpServletResponse response = mockMvc
                 .perform(MockMvcRequestBuilders.post("/login")
                         .content(String.format("{\"username\": \"%s\",\"password\": \"%s\"}", role.getUsername(), role.getPassword()))

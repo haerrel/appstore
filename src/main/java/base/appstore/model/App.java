@@ -4,9 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 /**
  * App.
@@ -63,7 +60,6 @@ public class App {
   }
 
   public String getTags() {
-//    return Arrays.asList(tags.split(","));
       return tags;
   }
 
@@ -96,6 +92,6 @@ public class App {
   }
 
   public double getRating() {
-    return 0; //TODO
+    return 3; //TODO
   }
 }
