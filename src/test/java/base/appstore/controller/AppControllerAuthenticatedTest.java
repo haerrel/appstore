@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import base.appstore.Role;
 import org.hamcrest.Matchers;
+import org.json.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -41,7 +42,7 @@ public class AppControllerAuthenticatedTest {
                         .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk()).andReturn().getResponse();
-        char id = response.getContentAsString().charAt(6);
+        String id = new JSONObject(response.getContentAsString()).getString("id");
         mockMvc.perform(put("/apps/" + id, mockMvc).as(Role.ADMIN)
                 .content("{\"title\":\"TestTest\",\"text\":\"test test test\",\"tags\": [{\"text\":\"test1\"}]}")
                 .contentType("application/json"));
@@ -56,7 +57,7 @@ public class AppControllerAuthenticatedTest {
                         .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk()).andReturn().getResponse();
-        char id = response.getContentAsString().charAt(6);
+        String id = new JSONObject(response.getContentAsString()).getString("id");
         mockMvc.perform(get("/apps/" + id, mockMvc).as(Role.ADMIN)).andExpect(status().isOk());
         mockMvc.perform(delete("/apps/" + id, mockMvc).as(Role.ADMIN));
     }
@@ -68,7 +69,7 @@ public class AppControllerAuthenticatedTest {
                         .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk()).andReturn().getResponse();
-        char id = response.getContentAsString().charAt(6);
+        String id = new JSONObject(response.getContentAsString()).getString("id");
         mockMvc.perform(delete("/apps/" + id, mockMvc).as(Role.ADMIN)).andExpect(status().isOk());
     }
 
@@ -79,7 +80,7 @@ public class AppControllerAuthenticatedTest {
                         .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk()).andReturn().getResponse();
-        char id = response.getContentAsString().charAt(6);
+        String id = new JSONObject(response.getContentAsString()).getString("id");
         mockMvc.perform(put("/apps/" + id, mockMvc).as(Role.ADMIN)
                 .content("{\"title\":\"Test2\",\"text\":\"test test\",\"tags\":\"test\"}")
                 .contentType("application/json")).andExpect(status().isOk());

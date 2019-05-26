@@ -54,7 +54,7 @@ public class AppControllerIntegrationTest {
                     .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                     .contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk()).andReturn().getResponse();
-    char id = response.getContentAsString().charAt(6);
+    String id = new JSONObject(response.getContentAsString()).getString("id");
     mockMvc.perform(get("/apps/" + id, mockMvc)
             .as(Role.ADMIN))
             .andExpect(status().isOk());
@@ -79,7 +79,7 @@ public class AppControllerIntegrationTest {
                     .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                     .contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk()).andReturn().getResponse();
-    char id = response.getContentAsString().charAt(6);
+    String id = new JSONObject(response.getContentAsString()).getString("id");
     mockMvc.perform(put("/apps/" + id, mockMvc).as(Role.ADMIN)
             .content("{\"title\":\"TestTest\",\"text\":\"test test\",\"tags\":\"test\"}")
             .contentType("application/json")).andExpect(status().isOk());
