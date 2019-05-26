@@ -1,5 +1,8 @@
-package base.appstore;
+package base.appstore.controller;
 
+import base.appstore.Role;
+import org.hamcrest.Matchers;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static base.appstore.Postman.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,20 +27,21 @@ public class AppControllerIntegrationTest {
 
   @Test
   public void listAllTest() throws Exception {
-    mockMvc.perform(get("/apps")).andExpect(status().isOk())
+    mockMvc.perform(get("/apps", mockMvc).as(Role.ADMIN))
+            .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-            .andExpect(content().string("[]"));
+            .andExpect(content().string(Matchers.startsWith("[")));
   }
 
   @Test
   public void createTest() throws Exception {
     MockHttpServletResponse response = mockMvc
-            .perform(post("/apps")
+            .perform(post("/apps", mockMvc).as(Role.ADMIN)
                     .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                     .contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk()).andReturn().getResponse();
-    char id = response.getContentAsString().charAt(6);
-    mockMvc.perform(delete("/apps/" + id));
+    String id = new JSONObject(response.getContentAsString()).getString("id");
+    mockMvc.perform(delete("/apps/" + id, mockMvc).as(Role.ADMIN));
   }
 
 
@@ -45,43 +49,46 @@ public class AppControllerIntegrationTest {
   @Test
   public void findTest() throws Exception {
     MockHttpServletResponse response = mockMvc
-            .perform(post("/apps")
+            .perform(post("/apps", mockMvc)
+                    .as(Role.ADMIN)
                     .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                     .contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk()).andReturn().getResponse();
     char id = response.getContentAsString().charAt(6);
-    mockMvc.perform(get("/apps/" + id)).andExpect(status().isOk());
-    mockMvc.perform(delete("/apps/" + id));
+    mockMvc.perform(get("/apps/" + id, mockMvc)
+            .as(Role.ADMIN))
+            .andExpect(status().isOk());
+    mockMvc.perform(delete("/apps/" + id, mockMvc).as(Role.ADMIN));
   }
 
   @Test
   public void deleteTest() throws Exception {
     MockHttpServletResponse response = mockMvc
-            .perform(post("/apps")
+            .perform(post("/apps", mockMvc).as(Role.ADMIN)
                     .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                     .contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk()).andReturn().getResponse();
-    char id = response.getContentAsString().charAt(6);
-    mockMvc.perform(delete("/apps/" + id)).andExpect(status().isOk());
+    String id = new JSONObject(response.getContentAsString()).getString("id");
+    mockMvc.perform(delete("/apps/" + id, mockMvc).as(Role.ADMIN)).andExpect(status().isOk());
   }
 
   @Test
   public void updateTest() throws Exception {
     MockHttpServletResponse response = mockMvc
-            .perform(post("/apps")
+            .perform(post("/apps", mockMvc).as(Role.ADMIN)
                     .content("{\"title\":\"Test\",\"text\":\"test test\",\"tags\":\"test\"}")
                     .contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk()).andReturn().getResponse();
     char id = response.getContentAsString().charAt(6);
-    mockMvc.perform(put("/apps/" + id)
+    mockMvc.perform(put("/apps/" + id, mockMvc).as(Role.ADMIN)
             .content("{\"title\":\"TestTest\",\"text\":\"test test\",\"tags\":\"test\"}")
             .contentType("application/json")).andExpect(status().isOk());
-    mockMvc.perform(delete("/app/" + id));
+    mockMvc.perform(delete("/app/" + id, mockMvc).as(Role.ADMIN));
   }
 
   @Test
   public void updateTestFailed() throws Exception {
-    mockMvc.perform(put("/apps/" + 0)
+    mockMvc.perform(put("/apps/" + 0, mockMvc).as(Role.ADMIN)
             .content("{\"title\":\"TestTest\",\"text\":\"test test\",\"tags\":\"test\"}")
             .contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk());
   }
