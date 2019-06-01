@@ -1,9 +1,9 @@
 package base.appstore.model;
 
 public enum PredefinedUser {
-    ADMIN("DemoAdmin", Constants.DEMO_PASSWORD),
-    DEVELOPER("DemoDeveloper",Constants.DEMO_PASSWORD),
-    USER("DemoUser",Constants.DEMO_PASSWORD);
+    ADMIN("DemoAdmin", Constants.DEMO_PW),
+    DEVELOPER("DemoDeveloper",Constants.DEMO_PW),
+    USER("DemoUser",Constants.DEMO_PW);
 
     private final String username;
     private final String password;
@@ -22,6 +22,6 @@ public enum PredefinedUser {
     }
 
     private static class Constants {
-        public static final String DEMO_PASSWORD = "DemoPassword";
+        public static final String DEMO_PW = "DemoPassword";
     }
 }
