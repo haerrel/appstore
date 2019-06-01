@@ -16,8 +16,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class AppTest {
 
@@ -98,6 +99,17 @@ public class AppTest {
         PredefinedUser user = PredefinedUser.USER;
         assertEquals("DemoUser", user.getUsername());
         assertEquals("DemoPassword", user.getPassword());
+    }
+
+    @Test
+    public void tagTest() {
+        Tag tag = new Tag("test");
+        tag.setApps(null);
+        tag.setText("test");
+
+        assertNull(tag.getApps());
+        assertEquals("test", tag.getText());
+        assertNull(tag.getId());
     }
 
 }
