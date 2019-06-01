@@ -4,6 +4,7 @@ import base.appstore.exception.AppNotFoundException;
 import base.appstore.exception.EntityNotFoundException;
 import base.appstore.exception.JwtAuthenticationException;
 import base.appstore.security.JwtAuthenticatedProfile;
+import base.appstore.security.JwtAuthenticationProvider;
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.reflection.impl.PojoClassFactory;
 import com.openpojo.validation.Validator;
@@ -14,6 +15,7 @@ import com.openpojo.validation.test.impl.GetterTester;
 import com.openpojo.validation.test.impl.SetterTester;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.security.core.Authentication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +112,16 @@ public class AppTest {
         assertNull(tag.getApps());
         assertEquals("test", tag.getText());
         assertNull(tag.getId());
+    }
+
+    @Test
+    public void accTest() {
+        Account acc = new Account();
+        acc.setId(42L);
+        acc.setFirstname("aa");
+        acc.setLastname("aa");
+        assertEquals("aa", acc.getFirstname());
+        assertEquals("aa", acc.getLastname());
     }
 
 }
