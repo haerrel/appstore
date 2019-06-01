@@ -85,5 +85,19 @@ public class AppTest {
         assertEquals((long) 88, (long) rating.getUserId());
     }
 
+    @Test
+    public void preUserTest() {
+        PredefinedUser admin = PredefinedUser.ADMIN;
+        assertEquals("DemoAdmin", admin.getUsername());
+        assertEquals("DemoPassword", admin.getPassword());
+
+        PredefinedUser developer = PredefinedUser.DEVELOPER;
+        assertEquals("DemoDeveloper", developer.getUsername());
+        assertEquals("DemoPassword", developer.getPassword());
+
+        PredefinedUser user = PredefinedUser.USER;
+        assertEquals("DemoUser", user.getUsername());
+        assertEquals("DemoPassword", user.getPassword());
+    }
 
 }
