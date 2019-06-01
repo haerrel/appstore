@@ -38,6 +38,12 @@ public class AppControllerAuthenticatedTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().string(Matchers.startsWith("[")));
     }
+    @Test
+    public void listAllTwoTest() throws Exception {
+        mockMvc.perform(get("/apps?filter=test", mockMvc).as(PredefinedUser.ADMIN)).andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().string(Matchers.startsWith("[")));
+    }
 
     @Test
     public void createTest() throws Exception {
