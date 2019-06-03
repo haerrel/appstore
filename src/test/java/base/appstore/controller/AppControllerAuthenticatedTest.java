@@ -33,6 +33,19 @@ public class AppControllerAuthenticatedTest {
     }
 
     @Test
+    public void listAllOneTest() throws Exception {
+        mockMvc.perform(get("/apps?search=test", mockMvc).as(PredefinedUser.ADMIN)).andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().string(Matchers.startsWith("[")));
+    }
+    @Test
+    public void listAllTwoTest() throws Exception {
+        mockMvc.perform(get("/apps?filter=test", mockMvc).as(PredefinedUser.ADMIN)).andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().string(Matchers.startsWith("[")));
+    }
+
+    @Test
     public void createTest() throws Exception {
         MockHttpServletResponse response = mockMvc
                 .perform(post("/apps", mockMvc).as(PredefinedUser.ADMIN)
