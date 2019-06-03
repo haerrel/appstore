@@ -1,41 +1,47 @@
-<form>
-  <div>
-    <label>App-Name</label>
-    <input/>
+<div class="contentContainer d-flex flex-column w-25">
+  <div class="form-group">
+    <label class="custom-control-label">App-Name</label>
+    <input class="form-control" type="text"/>
   </div>
-  <div>
-    <label>Thumbnail</label>
-    <input/>
+  <div class="form-group">
+    <label class="custom-control-label">Thumbnail</label>
+    <input class="form-control" type="text"/>
   </div>
-  <div>
-    <label>Link</label>
-    <input/>
+  <div class="form-group">
+    <label class="custom-control-label">Link</label>
+    <input class="form-control" type="text"/>
   </div>
-  <div>
-    <label>Bilder</label>
-    <input/>
-    <label>Tags</label>
-    <input #tagid/>
-    <button (click)="addTag(tagid)">Add</button>
+  <div class="form-group">
+    <label class="custom-control-label">Bilder</label>
+    <input class="form-control" type="text"/>
+    <label class="custom-control-label">Tags</label>
+    <input class="form-control" type="text"/>
+    <button class="btn btn-primary" (click)="addTag(tagid)">Add</button>
     <div *ngFor="let image of images; let i = index">
-      #{{image}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px" (click)="images.splice(i,1)"></i></span>
+      #{{image}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
+                                             (click)="images.splice(i,1)"></i></span>
     </div>
 
   </div>
-  <div>
-    <label>Beschreibung</label>
-    <input/>
+  <div class="form-group">
+    <label class="custom-control-label">Beschreibung</label>
+    <input class="form-control" type="text"/>
   </div>
-  <div>
-    <label>Zum Entwickler</label>
-    <input/>
+  <div class="form-group">
+    <label class="custom-control-label">Zum Entwickler</label>
+    <input class="form-control" type="text"/>
   </div>
-  <div>
-    <label>Tags</label>
-    <input #tagid/>
-    <button (click)="addTag(tagid)">Add</button>
+  <div class="form-group">
+    <label class="custom-control-label">Tags</label>
+    <div class="d-flex flex-row">
+      <input class="form-control mr-sm-2" type="text" #tagid/>
+      <button class="btn btn-primary px-3" (click)="addTag(tagid)"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+      </button>
+
+    </div>
     <div *ngFor="let tag of tags; let i = index">
-      #{{tag}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px" (click)="tags.splice(i,1)"></i></span>
+      #{{tag}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
+                                           (click)="tags.splice(i,1)"></i></span>
     </div>
   </div>
-</form>
+</div>
