@@ -13,6 +13,7 @@ import {AuthInterceptor} from './services/auth/auth.interceptor';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
+import { NewAppComponent } from './routes/root/new-app/new-app.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {FormsModule} from '@angular/forms';
     HomeComponent,
     AppcardComponent,
     LoginComponent,
-    RootComponent
+    RootComponent,
+    NewAppComponent
   ],
   imports: [
     BrowserModule,
