@@ -1,0 +1,41 @@
+<form>
+  <div>
+    <label>App-Name</label>
+    <input/>
+  </div>
+  <div>
+    <label>Thumbnail</label>
+    <input/>
+  </div>
+  <div>
+    <label>Link</label>
+    <input/>
+  </div>
+  <div>
+    <label>Bilder</label>
+    <input/>
+    <label>Tags</label>
+    <input #tagid/>
+    <button (click)="addTag(tagid)">Add</button>
+    <div *ngFor="let image of images; let i = index">
+      #{{image}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px" (click)="images.splice(i,1)"></i></span>
+    </div>
+
+  </div>
+  <div>
+    <label>Beschreibung</label>
+    <input/>
+  </div>
+  <div>
+    <label>Zum Entwickler</label>
+    <input/>
+  </div>
+  <div>
+    <label>Tags</label>
+    <input #tagid/>
+    <button (click)="addTag(tagid)">Add</button>
+    <div *ngFor="let tag of tags; let i = index">
+      #{{tag}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px" (click)="tags.splice(i,1)"></i></span>
+    </div>
+  </div>
+</form>
