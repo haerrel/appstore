@@ -23,6 +23,7 @@ public class App {
     private String title;
     private Integer price;
     private String datePublished;
+    private String link;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "app_tags",
@@ -51,12 +52,13 @@ public class App {
      * @param text  Text of an App.
      * @param title Title of an App.
      */
-    public App(String text, String title, Set<Tag> tags, Integer price, String datePublished) {
+    public App(String text, String title, Set<Tag> tags, Integer price, String datePublished, String link) {
         this.text = text;
         this.title = title;
         this.tags = tags;
         this.price = price;
         this.datePublished = datePublished;
+        this.link = link;
     }
 
     public Long getId() {
@@ -91,11 +93,33 @@ public class App {
         this.tags = tags;
     }
 
-  public void setDatePublished(String datePublished) {
-    this.datePublished = datePublished;
-  }
+    public String getDatePublished() {
+        return datePublished;
+    }
 
-  public double getRating() {
-    return 3; //TODO
-  }
+    public void setDatePublished(String datePublished) {
+        this.datePublished = datePublished;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public double getRating() {
+        return 3;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+
 }

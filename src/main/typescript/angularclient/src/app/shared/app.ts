@@ -8,4 +8,5 @@ export class App {
   price: number;
   datePublished: string;
   rating: number;
+  link: string;
 }
