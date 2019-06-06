@@ -1,0 +1,47 @@
+<div class="contentContainer d-flex flex-column w-25">
+  <div class="form-group">
+    <label class="custom-control-label">App-Name</label>
+    <input class="form-control" type="text" [value]="this.app.title"/>
+  </div>
+  <div class="form-group">
+    <label class="custom-control-label">Thumbnail</label>
+    <input class="form-control" type="text"/>
+  </div>
+  <div class="form-group">
+    <label class="custom-control-label">Link</label>
+    <input class="form-control" type="text" [value]="this.app.link"/> <!-- TODO backend has to serve link -->
+  </div>
+  <div class="form-group">
+    <label class="custom-control-label">Images</label>
+    <div class="d-flex flex-row">
+      <input class="form-control mr-sm-2" type="text" #imagesInput/>
+      <button class="btn btn-primary px-3" (click)="addTag(imagesInput)"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div *ngFor="let image of [this.app.images]; let i = index"> <!-- TODO workaround, backend has to serve a array of tags -->
+      {{image}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
+                                           (click)="this.app.images.splice(i,1)"></i></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="custom-control-label">Beschreibung</label>
+    <input class="form-control" type="text" [value]="this.app.text"/>
+  </div>
+  <div class="form-group">
+    <label class="custom-control-label">Zum Entwickler</label>
+    <input class="form-control" type="text"/>
+  </div>
+  <div class="form-group">
+    <label class="custom-control-label">Tags</label>
+    <div class="d-flex flex-row">
+      <input class="form-control mr-sm-2" type="text" #tagInput/>
+      <button class="btn btn-primary px-3" (click)="addTag(tagInput)"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div *ngFor="let tag of [this.app.tags]; let i = index"> <!-- TODO workaround, backend has to serve a array of tags -->
+      #{{tag}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
+                                           (click)="this.app.tags.splice(i,1)"></i></span>
+    </div>
+  </div>
+  <button class="btn btn-primary btn-success">Save Changes</button>
+</div>
