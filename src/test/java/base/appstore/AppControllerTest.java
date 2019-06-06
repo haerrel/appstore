@@ -1,13 +1,41 @@
 package base.appstore;
 
-/*
+import base.appstore.controller.AppController;
+import base.appstore.model.App;
+import base.appstore.repository.AppRepository;
+import base.appstore.repository.RatingRepository;
+import base.appstore.security.JwtAuthenticationEntryPoint;
+import org.hamcrest.Matchers;
+import org.json.JSONArray;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @RunWith(SpringRunner.class)
-@WebMvcTest(AppController.class)
+@SpringBootTest
 @AutoConfigureMockMvc
 public class AppControllerTest {
 
-
-  TODO java.lang.IllegalStateException: Failed to load ApplicationContext
+  //  TODO java.lang.IllegalStateException: Failed to load ApplicationContext
 
   @MockBean
   private AppRepository appRepository;
@@ -148,6 +176,4 @@ public class AppControllerTest {
     Assert.assertEquals(1, json.length());
     Assert.assertEquals("Facebook Messenger", json.getJSONObject(0).get("title"));
   }
-
 }
-*/

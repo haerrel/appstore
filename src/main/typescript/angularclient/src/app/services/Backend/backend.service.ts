@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {App} from '../../shared/app';
 import {environment} from '../../../environments/environment';
+import {AuthService} from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class BackendService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   getFamousApps(limit: number = 50) {
     return this.http.get<App[]>(this.endpoint + 'apps?filter=famous&limit=' + limit);
@@ -32,4 +33,16 @@ export class BackendService {
     return this.http.get<App[]>(this.endpoint + 'apps?filter=newest&limit=' + limit);
   }
 
+  getApp(id: number) {
+    return this.http.get<App>(this.endpoint + 'apps/' + id);
+  }
+
+  postApp(app: App) {
+    return this.http.post(this.endpoint + 'apps', app, {});
+  }
+
+  getAppsOfUser() {
+    const user = this.auth.getUsername();
+    return this.http.get<App[]>(this.endpoint + 'apps?limit=10'); // TODO only get user apps
+  }
 }
