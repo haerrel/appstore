@@ -7,5 +7,8 @@ $apps = @(
 )
 
 $apps | %{
-    Invoke-WebRequest -Method Post -Body $_ -Headers @{"Content-Type" = "application/json;charset=UTF-8"} http://localhost:8080/apps
+    Invoke-WebRequest -Method Post -Body $_ -Headers @{
+        "Content-Type" = "application/json;charset=UTF-8";
+        "Authorization" = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEZW1vRGV2ZWxvcGVyIiwicm9sZSI6IlJPTEVfREVWRUxPUEVSIiwiZXhwIjoxNTY0ODU5MzAzLCJpYXQiOjE1NTg4MTEzMDN9.YuATdHbQXBVicZTtt01vBB6CHof-D5e5SsS0pFI3714svh3yevfxavttKaNzm9Tt1Emuh90qZb6qbUoUxP-npw"
+    } http://localhost:8080/apps
 }
