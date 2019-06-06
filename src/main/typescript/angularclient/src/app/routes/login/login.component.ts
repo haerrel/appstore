@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(role: string) {
-    // TODO some load spinner here
     let loginPromise = null;
     switch (role) {
       case 'ADMIN':
