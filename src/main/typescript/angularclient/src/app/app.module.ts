@@ -16,6 +16,8 @@ import {FormsModule} from '@angular/forms';
 import { NewAppComponent } from './routes/root/user/new-app/new-app.component';
 import { UserComponent } from './routes/root/user/user.component';
 import { EditAppComponent } from './routes/root/user/edit-app/edit-app.component';
+import { AppDetailsComponent } from './routes/root/app-details/app-details.component';
+import { StarRatingComponent } from './mixins/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { EditAppComponent } from './routes/root/user/edit-app/edit-app.component
     RootComponent,
     NewAppComponent,
     UserComponent,
-    EditAppComponent
+    EditAppComponent,
+    AppDetailsComponent,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,

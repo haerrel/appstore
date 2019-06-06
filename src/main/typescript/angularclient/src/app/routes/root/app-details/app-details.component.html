@@ -1,0 +1,46 @@
+<div>
+  Container links an der Seite
+</div>
+<div class="container">
+  <div class="row">
+    <!-- headline -->
+    <div class="col-sm-12">
+      <h1 class="d-inline-block align-middle mr-2">{{this.app.title}}</h1>
+      <img class="d-inline-block align-middle mr-2" src="https://via.placeholder.com/60"/>
+      <a class="d-inline-block align-middle mr-2" [href]="this.app.link">
+        Hier gehts zur App
+        <i class="fa fa-external-link" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+  <hr>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <!-- COLUMN 1 -->
+        <div id="tagbar" *ngFor="let tag of [this.app.tags]">
+          <a class="d-inline mr-2" [routerLink]="" (click)="addTagToSearch(tag)">{{tag}}</a>
+        </div>
+        <div class="d-inline mr-2" id="images" *ngFor="let image of [1,2]"> <!-- TODO this.app.images, ggf. auch eigene images componente -->
+          <img src="https://via.placeholder.com/40"/>
+        </div>
+        <div>
+          <h5>Beschreibung</h5>
+          <p>{{this.app.text}}</p>
+        </div>
+        <div>
+          <h5>Zum Entwickler</h5>
+          <p>{{this.app.developer}}</p> <!-- TODO this.app.developer not served by backend -->
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <!-- COLUMN 2 -->
+        <div>
+          <b>Bewertung: </b>
+          <app-star-rating [rating]="3" [overall]="5"></app-star-rating>
+          <button class="btn btn-primary px-3" (click)="add(tagid)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
