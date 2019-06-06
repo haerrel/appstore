@@ -47,9 +47,8 @@
                                                                            aria-hidden="true"></i>
         </button>
       </div>
-      <div *ngFor="let tag of [this.app.tags]; let i = index">
-        <!-- TODO workaround, backend has to serve a array of tags -->
-        #{{tag}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
+      <div *ngFor="let tag of this.app.tags; let i = index">
+        #{{tag.text}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
                                              (click)="this.app.tags.splice(i,1)"></i></span>
       </div>
     </div>

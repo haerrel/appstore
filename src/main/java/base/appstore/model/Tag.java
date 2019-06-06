@@ -13,7 +13,7 @@ public class Tag {
     private Long id;
     private String text;
 
-
+    //@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @ManyToMany(cascade = CascadeType.ALL)
     //avoid the infinite recursion in the JSON responses
     @JsonBackReference

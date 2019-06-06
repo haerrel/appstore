@@ -18,17 +18,23 @@
     <div class="row">
       <div class="col-sm-6">
         <!-- COLUMN 1 -->
-        <div id="tagbar" *ngFor="let tag of [this.app.tags]">
-          <a class="d-inline mr-2" [routerLink]="" (click)="addTagToSearch(tag)">{{tag}}</a>
+        <div class="pb-3">
+          <h5>Tags</h5>
+          <div class="d-inline mr-2" id="tagbar" *ngFor="let tag of this.app.tags">
+            <a [routerLink]="" (click)="addTagToSearch(tag)">#{{tag.text}}</a>
+          </div>
         </div>
-        <div class="d-inline mr-2" id="images" *ngFor="let image of [1,2]"> <!-- TODO this.app.images, ggf. auch eigene images componente -->
-          <img src="https://via.placeholder.com/40"/>
+        <div class="pb-3">
+          <h5>Bilder</h5>
+          <div class="d-inline mr-2" id="images" *ngFor="let image of [1,2]"> <!-- TODO this.app.images, ggf. auch eigene images componente -->
+            <img src="https://via.placeholder.com/40"/>
+          </div>
         </div>
-        <div>
+        <div class="pb-3">
           <h5>Beschreibung</h5>
           <p>{{this.app.text}}</p>
         </div>
-        <div>
+        <div class="pb-3">
           <h5>Zum Entwickler</h5>
           <p>{{this.app.developer}}</p> <!-- TODO this.app.developer not served by backend -->
         </div>
