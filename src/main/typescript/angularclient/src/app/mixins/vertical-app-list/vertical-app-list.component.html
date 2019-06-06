@@ -1,0 +1,23 @@
+<div class="shadow-lg ml-5 overflow-auto" style="width: 270px">
+  <div *ngFor="let app of this.apps">
+
+    <div class="card mb-3 shadow-sm" [routerLink]="[this.routerPrefix, app.id]">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <div class="text-center">
+            <img src="https://via.placeholder.com/80" class="card-img" alt="">
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title text-truncate">{{app.title}}</h5>
+            <div class="flex-grow-1">
+              <app-star-rating [rating]="app.rating" [overall]="5"></app-star-rating>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

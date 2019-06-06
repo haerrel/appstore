@@ -18,6 +18,7 @@ import { UserComponent } from './routes/root/user/user.component';
 import { EditAppComponent } from './routes/root/user/edit-app/edit-app.component';
 import { AppDetailsComponent } from './routes/root/app-details/app-details.component';
 import { StarRatingComponent } from './mixins/star-rating/star-rating.component';
+import { VerticalAppListComponent } from './mixins/vertical-app-list/vertical-app-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { StarRatingComponent } from './mixins/star-rating/star-rating.component'
     UserComponent,
     EditAppComponent,
     AppDetailsComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    VerticalAppListComponent
   ],
   imports: [
     BrowserModule,
