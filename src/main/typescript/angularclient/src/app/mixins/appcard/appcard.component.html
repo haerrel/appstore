@@ -12,10 +12,8 @@
 
     <div class="d-flex flex-row">
       <div class="flex-grow-1">
-        <i class="fa fa-star checked" *ngFor="let item of [].constructor(3)"></i>
-        <i class="fa fa-star" *ngFor="let item of [].constructor(2)"></i>
+        <app-star-rating [rating]="3" [overall]="5"></app-star-rating>
       </div>
-
       <div>{{app.price}} €</div>
     </div>
 
