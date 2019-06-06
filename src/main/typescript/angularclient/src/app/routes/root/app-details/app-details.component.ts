@@ -12,6 +12,7 @@ import {SearchService} from '../../../services/search/search.service';
 export class AppDetailsComponent implements OnInit {
 
   app: App = new App();
+  sidebarApps: Array<App> = [];
 
   constructor(private route: ActivatedRoute, private backend: BackendService, private search: SearchService) { }
 
@@ -21,11 +22,17 @@ export class AppDetailsComponent implements OnInit {
       if (appId) {
         this.backend.getApp(appId).subscribe(res => {
           this.app = res;
+          this.getSearch().getLastSearchResultWithSelectedApp(this.app.id)
+            .then(apps => this.sidebarApps = apps)
+            .catch(err => console.log(err));
         });
       }
     });
   }
 
+  getSearch(): SearchService {
+    return this.search;
+  }
 
   addTagToSearch(tag: string) {
     this.search.addTags(tag);

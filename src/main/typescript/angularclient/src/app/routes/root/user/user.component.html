@@ -1,32 +1,9 @@
 <div class="pt-4 d-flex flex-row">
-  <!-- left side || Liste -->
-  <div class="shadow-lg ml-5 overflow-auto" style="width: 270px">
-    <div *ngFor="let app of this.apps">
 
-      <div class="card mb-3 shadow-sm" [routerLink]="['/user/myapps/', app.id]">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <div class="text-center">
-              <img src="https://via.placeholder.com/80" class="card-img" alt="">
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title text-truncate">{{app.title}}</h5>
-              <div class="flex-grow-1">
-                <i class="fa fa-star checked" *ngFor="let item of [].constructor(3)"></i>
-                <i class="fa fa-star" *ngFor="let item of [].constructor(2)"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
+  <app-vertical-app-list [apps]="this.apps" routerPrefix='/user/myapps/'></app-vertical-app-list>
 
   <!-- right side || Detail-->
-  <div class="flex-grow-1 bg-dark">
+  <div class="flex-grow-1">
     <router-outlet></router-outlet>
   </div>
 </div>
