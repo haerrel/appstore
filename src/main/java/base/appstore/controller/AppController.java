@@ -1,9 +1,11 @@
 package base.appstore.controller;
 
 import base.appstore.exception.AppNotFoundException;
-import base.appstore.model.App;
+import base.appstore.model.Tag;
 import base.appstore.repository.AppRepository;
+import base.appstore.model.App;
 import base.appstore.repository.RatingRepository;
+import base.appstore.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -24,17 +26,19 @@ public class AppController {
     @Autowired
     private RatingRepository ratingRepository;
 
+    @Autowired
+    private TagRepository tagRepository;
+
     //allowed for all in WebSecurityConfig
-  @PreAuthorize("hasRole('DEVELOPER') or hasRole('ADMIN')")
-  @GetMapping
-  public List<App> all(@RequestParam(required = false) String search,
-                       @RequestParam(required = false) List<String> tag,
-                       @RequestParam(required = false) Integer limit,
-                       @RequestParam(required = false) String filter
-  ) {
-    if (Objects.isNull(search) && Objects.isNull(filter) && Objects.isNull(tag) && Objects.isNull(limit)) {
-        return appRepository.findAll();
-    }
+    @GetMapping
+    public List<App> all(@RequestParam(required = false) String search,
+                         @RequestParam(required = false) List<String> tag,
+                         @RequestParam(required = false) Integer limit,
+                         @RequestParam(required = false) String filter
+    ) {
+        if (Objects.isNull(search) && Objects.isNull(filter) && Objects.isNull(tag) && Objects.isNull(limit)) {
+            return appRepository.findAll();
+        }
 
         Stream<App> appStream = appRepository.findAll().stream();
         if (!Objects.isNull(search)) {
@@ -74,18 +78,35 @@ public class AppController {
         return appRepository.findById(id).orElseThrow(() -> new AppNotFoundException(id));
     }
 
-
+    //allowed for developer and admin
     @PreAuthorize("hasRole('DEVELOPER') or hasRole('ADMIN')")
     @PostMapping
     public App create(@RequestBody App input) {
-        return appRepository.save(new App(input.getText(), input.getTags(), input.getTitle(), input.getPrice(), input.getDatePublished()));
+        //create new App
+        App newApp = new App(input.getText(), input.getTitle());
+        newApp.setPrice(input.getPrice());
+        newApp.setDatePublished(input.getDatePublished());
+        newApp.setLink(input.getLink());
+
+        //check if Tags are already in repo
+        Set<Tag> inputTags = new HashSet<>(input.getTags());
+        Iterator<Tag> tagIterator = inputTags.iterator();
+        while (tagIterator.hasNext()) {
+            Tag tag = tagIterator.next();
+            Tag savedTag = tagRepository.findOneByText(tag.getText()).orElseGet(() -> tagRepository.save(tag));
+            newApp.getTags().add(savedTag);
+            savedTag.getApps().add(newApp);
+        }
+        return appRepository.save(newApp);
     }
 
     //allowed for admin only
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
-        appRepository.deleteById(id);
+        App toDelete = appRepository.findById(id).orElseThrow(() -> new AppNotFoundException(id));
+        toDelete.getTags().forEach((Tag tag) -> tag.getApps().remove(toDelete));
+        appRepository.delete(toDelete); //App cant be null!
     }
 
     //allowed for developer and admin
@@ -97,11 +118,10 @@ public class AppController {
             app.setTitle(input.getTitle());
             app.setText(input.getText());
             app.setTags(input.getTags());
+            app.setLink(input.getLink());
             return appRepository.save(app);
-        }).orElseGet(() -> {
-            input.setId(id);
-            return appRepository.save(input);
-        });
+        }).orElseGet(() ->
+            create(input)
+        );
     }
-
 }
