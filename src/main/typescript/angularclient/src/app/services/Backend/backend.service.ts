@@ -37,6 +37,10 @@ export class BackendService {
     return this.http.get<App>(this.endpoint + 'apps/' + id);
   }
 
+  putApp(app: App) {
+    return this.http.put(this.endpoint + 'apps/' + app.id, app, {});
+  }
+
   postApp(app: App) {
     return this.http.post(this.endpoint + 'apps', app, {});
   }

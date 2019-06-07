@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BackendService} from '../../../../services/Backend/backend.service';
 import {App} from '../../../../shared/app';
+import {Tag} from '../../../../shared/tag';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-app',
@@ -11,27 +13,42 @@ import {App} from '../../../../shared/app';
 export class EditAppComponent implements OnInit {
 
   app: App = new App();
-  tags: Array<string> = [];
   images: Array<string> = [];
 
-  constructor(private route: ActivatedRoute, private backend: BackendService) { }
+  constructor(private route: ActivatedRoute, private backend: BackendService, private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const appId = parseInt(params.get('id'), 10);
-      if (appId) {
-        this.backend.getApp(appId).subscribe(res => {
-          this.app = res;
-        });
-      }
-    });
+    this.refreshForm();
   }
 
   addTag(input) {
     if (input.value) {
-      this.tags.push(input.value);
+      const newTag = new Tag();
+      newTag.text = input.value;
+      this.app.tags.push(newTag);
       input.value = "";
     }
   }
 
+  refreshForm() {
+    this.route.paramMap.subscribe(params => {
+      const appId = parseInt(params.get('id'), 10);
+      this.getApp(appId);
+    });
+  }
+
+  getApp(appId: number) {
+    if (appId) {
+      this.backend.getApp(appId).subscribe(res => {
+        this.app = res;
+      });
+    }
+  }
+
+  submit() {
+    this.backend.putApp(this.app).subscribe((res: App) => {
+      this.toastr.success(`App updated, ID=${res.id}`, 'App');
+      this.getApp(res.id);
+    });
+  }
 }
