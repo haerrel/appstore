@@ -33,8 +33,20 @@
     </ul>
   </div>
 
+
+  <!-- TODO Breite der Suchleiste ist irgendwie bei meinem Umbau kaputt gegangen-->
+  <!--
+  Dies soll nur als Beispiel dienen
+  Die Tags sollten irgendwo rechts in der Suchleiste dargestellt werden. So wie im Mock.
+  Habe CSS zum Demozweck eingefügt, kannst komplett löschen.
+  -->
   <div class="d-flex flex-row w-50 m-md-auto">
-    <input class="form-control w-100 mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <div id="container" >
+      <input class="form-control w-100 mr-sm-2" type="search" placeholder="Search" aria-label="Search" #searchInput (keyup)="search(searchInput)">
+      <div id="click">
+        <div *ngFor="let tag of this.getTags()" class="d-inline-block">{{tag.text}}</div>
+      </div>
+    </div>
     <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
   </div>
 
