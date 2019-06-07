@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "45f2d28d-cb8b-4d41-9c64-4f308bdfebc5",
+		"name": "SWA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RocketBeans",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEZW1vRGV2ZWxvcGVyIiwicm9sZSI6IlJPTEVfREVWRUxPUEVSIiwiZXhwIjoxNTY0ODU5MzAzLCJpYXQiOjE1NTg4MTEzMDN9.YuATdHbQXBVicZTtt01vBB6CHof-D5e5SsS0pFI3714svh3yevfxavttKaNzm9Tt1Emuh90qZb6qbUoUxP-npw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Krasser Youtube Channel von dem ich noch nie gehört habe\",\n    \"tags\": [\"2\", \"fancy\"],\n    \"title\": \"Rocket Beans\",\n    \"price\": 2,\n    \"datePublished\": \"2019-04-30\",\n    \"link\": \"https://rocketbeans.tv/\"\n}"
+				},
+				"url": {
+					"raw": "http://{{server}}/apps",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEZW1vRGV2ZWxvcGVyIiwicm9sZSI6IlJPTEVfREVWRUxPUEVSIiwiZXhwIjoxNTY0ODU5MzAzLCJpYXQiOjE1NTg4MTEzMDN9.YuATdHbQXBVicZTtt01vBB6CHof-D5e5SsS0pFI3714svh3yevfxavttKaNzm9Tt1Emuh90qZb6qbUoUxP-npw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Populärer Instant Messenger\",\n    \"tags\": [\"Whats\", \"UP\"],\n    \"title\": \"WhatsApp\",\n    \"price\": 3,\n    \"datePublished\": \"2019-04-28\",\n    \"link\": \"https://web.whatsapp.com\"\n}"
+				},
+				"url": {
+					"raw": "http://{{server}}/apps",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create App1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Erste und neueste App\",\n    \"tags\": \"#neu, #fancy\",\n    \"title\": \"First App\",\n    \"price\": 1,\n    \"datePublished\": \"2019-04-29\"\n}"
+				},
+				"url": {
+					"raw": "http://{{server}}/apps",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create App2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Zweite App\",\n    \"tags\": \"#2, #fancy\",\n    \"title\": \"Second App\",\n    \"price\": 2,\n    \"datePublished\": \"2019-04-30\"\n}"
+				},
+				"url": {
+					"raw": "http://{{server}}/apps",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create App3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Dritte App\",\n    \"tags\": \"#3, #oldschool\",\n    \"title\": \"Third App\",\n    \"price\": 3,\n    \"datePublished\": \"2019-04-31\"\n}"
+				},
+				"url": {
+					"raw": "http://{{server}}/apps",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Apps (DEV)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer yJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEZW1vQWRtaW4iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTU2NDI2MTkyOCwiaWF0IjoxNTU4MjEzOTI4fQ.Fu7B7ydO48gfWmPbNzie1J-jAFb1LKGVuJlndXCERpiWOjOvJL54Oup_GbOIthuXWR4DBQ5V6NfP86-uYidrMA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{server}}/apps?filter=newest&limit=50",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"apps"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "newest"
+						},
+						{
+							"key": "limit",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Apps Copy (ADMIN)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer yJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEZW1vQWRtaW4iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTU2NDI2MTkyOCwiaWF0IjoxNTU4MjEzOTI4fQ.Fu7B7ydO48gfWmPbNzie1J-jAFb1LKGVuJlndXCERpiWOjOvJL54Oup_GbOIthuXWR4DBQ5V6NfP86-uYidrMA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{server}}/apps?filter=newest&limit=50",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"apps"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "newest"
+						},
+						{
+							"key": "limit",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Apps Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer yJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEZW1vQWRtaW4iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTU2NDI2MTkyOCwiaWF0IjoxNTU4MjEzOTI4fQ.Fu7B7ydO48gfWmPbNzie1J-jAFb1LKGVuJlndXCERpiWOjOvJL54Oup_GbOIthuXWR4DBQ5V6NfP86-uYidrMA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{server}}/apps?filter=newest&limit=50",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"apps"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "newest"
+						},
+						{
+							"key": "limit",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
