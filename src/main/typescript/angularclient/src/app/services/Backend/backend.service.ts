@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {App} from '../../shared/app';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../auth/auth.service';
+import {Tag} from '../../shared/tag';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,9 @@ export class BackendService {
   getAppsOfUser() {
     const user = this.auth.getUsername();
     return this.http.get<App[]>(this.endpoint + 'apps?limit=10'); // TODO only get user apps
+  }
+
+  getApps(searchPrefix: string, tags: Set<Tag>) {
+    return this.http.get<App[]>(this.endpoint + 'apps?search=' + searchPrefix + '&tags=' + Array.from(tags).map(tag => tag.text).join(','));
   }
 }
