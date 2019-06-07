@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BackendService} from '../../../../services/Backend/backend.service';
 import {App} from '../../../../shared/app';
 import {ToastrService} from 'ngx-toastr';
+import {Tag} from '../../../../shared/tag';
 
 @Component({
   selector: 'app-new-app',
@@ -33,7 +34,11 @@ export class NewAppComponent implements OnInit {
     app.text = this.text;
     app.title = this.title;
     app.price = 3; // TODO add field to html-form
-    app.tags = this.tags.join(',');
+    this.tags.forEach(tag => {
+      const newTag = new Tag();
+      newTag.text = tag;
+      app.tags.push(newTag);
+    });
     this.backend.postApp(app).subscribe((res: App) => {
       this.toastr.success(`New App created, ID=${res.id}`, 'App');
     });
