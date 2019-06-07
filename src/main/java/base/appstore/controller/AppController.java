@@ -32,11 +32,11 @@ public class AppController {
     //allowed for all in WebSecurityConfig
     @GetMapping
     public List<App> all(@RequestParam(required = false) String search,
-                         @RequestParam(required = false) List<String> tag,
+                         @RequestParam(required = false) Set<String> tags,
                          @RequestParam(required = false) Integer limit,
                          @RequestParam(required = false) String filter
     ) {
-        if (Objects.isNull(search) && Objects.isNull(filter) && Objects.isNull(tag) && Objects.isNull(limit)) {
+        if (Objects.isNull(search) && Objects.isNull(filter) && Objects.isNull(tags) && Objects.isNull(limit)) {
             return appRepository.findAll();
         }
 
@@ -44,11 +44,10 @@ public class AppController {
         if (!Objects.isNull(search)) {
             appStream = appStream.filter(app -> app.getTitle().startsWith(search));
         }
-        if (!Objects.isNull(tag) && !tag.isEmpty()) {
+        if (!Objects.isNull(tags) && !tags.isEmpty()) {
             appStream = appStream.filter(app -> {
-                List<String> appTags = new ArrayList<>(Arrays.asList(app.getTags().split(",")));
-                appTags.retainAll(tag);
-                return appTags.size() == tag.size();
+                Set<String> appTags = app.getTags().stream().map(Tag::getText).collect(Collectors.toSet());
+                return appTags.containsAll(tags);
             });
         }
         if (!Objects.isNull(filter)) {
