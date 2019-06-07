@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BackendService} from '../../../services/Backend/backend.service';
 import {App} from '../../../shared/app';
+import {SearchService} from '../../../services/search/search.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import {App} from '../../../shared/app';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private backend: BackendService) { }
+  constructor(private backend: BackendService, private search: SearchService) { }
 
   famousApps: App[] = [];
   cheapestApps: App[] = [];
@@ -27,4 +28,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  isSearchEmpty(): boolean {
+    return this.search.isEmpty();
+  }
+
+  getSearchApps() {
+    return this.search.getLastSearchResults();
+  }
+
+  noTags() {
+    return this.search.getTags().size === 0;
+  }
 }

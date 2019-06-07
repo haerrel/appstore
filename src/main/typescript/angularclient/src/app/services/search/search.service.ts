@@ -18,6 +18,10 @@ export class SearchService {
     this.tags.add(tag);
   }
 
+  getLastSearchResults() {
+    return this.apps;
+  }
+
   getLastSearchResultWithSelectedApp(appId: number): Promise<App[]> {
     return new Promise((resolve, reject) => {
       const appIdx = this.apps.findIndex(app => app.id === appId);
@@ -32,5 +36,20 @@ export class SearchService {
         return resolve(newApps);
       }
     });
+  }
+
+  isEmpty(): boolean {
+    return this.searchText === '';
+  }
+
+  search(text) {
+    this.searchText = text;
+    this.backend.getApps(text, this.tags).subscribe(apps => {
+      this.apps = apps;
+    });
+  }
+
+  getTags(): Set<Tag> {
+    return this.tags;
   }
 }
