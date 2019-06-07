@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import {App} from '../../shared/app';
 import {BackendService} from '../Backend/backend.service';
+import {Tag} from '../../shared/tag';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
 
-  tags: Set<string> = new Set();
+  searchText = '';
+  tags: Set<Tag> = new Set();
   apps: Array<App> = [];
 
   constructor(private backend: BackendService) { }
 
-
-  addTags(tag: string) {
+  addTag(tag: Tag) {
     this.tags.add(tag);
   }
 

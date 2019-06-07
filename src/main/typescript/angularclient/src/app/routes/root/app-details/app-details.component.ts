@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {BackendService} from '../../../services/Backend/backend.service';
 import {App} from '../../../shared/app';
 import {SearchService} from '../../../services/search/search.service';
+import {Tag} from '../../../shared/tag';
 
 @Component({
   selector: 'app-app-details',
@@ -34,7 +35,7 @@ export class AppDetailsComponent implements OnInit {
     return this.search;
   }
 
-  addTagToSearch(tag: string) {
-    this.search.addTags(tag);
+  addTagToSearch(tag: Tag) {
+    this.search.addTag(tag);
   }
 }
