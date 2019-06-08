@@ -5,7 +5,7 @@
   </div>
   <div class="form-group">
     <label class="custom-control-label">Thumbnail</label>
-    <input class="form-control" type="text"/>
+    <input #thumbnailInput class="form-control-file" type="file" accept="thumbnail/x-png,thumbnail/gif,thumbnail/jpeg"/>
   </div>
   <div class="form-group">
     <label class="custom-control-label">Link</label>
@@ -44,5 +44,5 @@
                                            (click)="tags.splice(i,1)"></i></span>
     </div>
   </div>
-  <button class="btn btn-primary success" (click)="postApp()">New App</button>
+  <button class="btn btn-primary success" (click)="postApp(thumbnailInput)">New App</button>
 </div>

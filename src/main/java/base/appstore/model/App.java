@@ -24,6 +24,7 @@ public class App {
     private Integer price;
     private String datePublished;
     private String link;
+    @Lob private String thumbnail;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "app_tags",
@@ -52,13 +53,14 @@ public class App {
      * @param text  Text of an App.
      * @param title Title of an App.
      */
-    public App(String text, String title, Set<Tag> tags, Integer price, String datePublished, String link) {
+    public App(String text, String title, Set<Tag> tags, Integer price, String datePublished, String link, String thumbnail) {
         this.text = text;
         this.title = title;
         this.tags = tags;
         this.price = price;
         this.datePublished = datePublished;
         this.link = link;
+        this.thumbnail = thumbnail;
     }
 
     public Long getId() {
@@ -121,5 +123,11 @@ public class App {
         this.link = link;
     }
 
+    public String getThumbnail() {
+        return thumbnail;
+    }
 
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 }

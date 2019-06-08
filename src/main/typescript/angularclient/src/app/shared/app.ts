@@ -9,4 +9,5 @@ export class App {
   datePublished: string;
   rating: number;
   link: string;
+  thumbnail: string;
 }

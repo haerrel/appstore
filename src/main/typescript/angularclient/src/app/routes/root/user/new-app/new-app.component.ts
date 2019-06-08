@@ -12,7 +12,6 @@ import {Tag} from '../../../../shared/tag';
 export class NewAppComponent implements OnInit {
 
   tags: Array<string> = [];
-  images: Array<string> = [];
   text: string;
   title: string;
 
@@ -21,26 +20,42 @@ export class NewAppComponent implements OnInit {
   ngOnInit() {
   }
 
-  addTag(input) {
-    if (input.value) {
-      this.tags.push(input.value);
-      input.value = "";
+  loadThumbnail(file, onSucess) {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (evt: any) => {
+        onSucess(evt.target.result);
+      };
+      reader.onerror = (evt: any) => {
+        this.toastr.error('Unable to read file', 'Thumbnail');
+      };
+      reader.readAsDataURL(file);
     }
   }
 
-  postApp() {
+  addTag(input) {
+    if (input.value) {
+      this.tags.push(input.value);
+      input.value = '';
+    }
+  }
+
+  postApp(thumbnailInput) {
     // TODO form validation here
-    const app = new App();
-    app.text = this.text;
-    app.title = this.title;
-    app.price = 3; // TODO add field to html-form
-    this.tags.forEach(tag => {
-      const newTag = new Tag();
-      newTag.text = tag;
-      app.tags.push(newTag);
-    });
-    this.backend.postApp(app).subscribe((res: App) => {
-      this.toastr.success(`New App created, ID=${res.id}`, 'App');
+    this.loadThumbnail(thumbnailInput.files[0], (thumbData) => {
+      const app = new App();
+      app.text = this.text;
+      app.title = this.title;
+      app.price = 3; // TODO add field to html-form
+      app.thumbnail = thumbData;
+      this.tags.forEach(tag => {
+        const newTag = new Tag();
+        newTag.text = tag;
+        app.tags.push(newTag);
+      });
+      this.backend.postApp(app).subscribe((res: App) => {
+        this.toastr.success(`New App created, ID=${res.id}`, 'App');
+      });
     });
   }
 

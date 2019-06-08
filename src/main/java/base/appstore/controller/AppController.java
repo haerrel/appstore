@@ -86,6 +86,7 @@ public class AppController {
         newApp.setPrice(input.getPrice());
         newApp.setDatePublished(input.getDatePublished());
         newApp.setLink(input.getLink());
+        newApp.setThumbnail(input.getThumbnail());
 
         //check if Tags are already in repo
         Set<Tag> inputTags = new HashSet<>(input.getTags());
