@@ -42,7 +42,7 @@ public class AppController {
 
         Stream<App> appStream = appRepository.findAll().stream();
         if (!Objects.isNull(search)) {
-            appStream = appStream.filter(app -> app.getTitle().startsWith(search));
+            appStream = appStream.filter(app -> app.getTitle().toLowerCase().startsWith(search.toLowerCase()));
         }
         if (!Objects.isNull(tags) && !tags.isEmpty()) {
             appStream = appStream.filter(app -> {
