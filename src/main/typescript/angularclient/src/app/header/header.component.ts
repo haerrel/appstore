@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {SearchService} from '../services/search/search.service';
@@ -11,7 +11,8 @@ import {Tag} from '../shared/tag';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, private searchService: SearchService) { }
+  constructor(private authService: AuthService, private router: Router, private searchService: SearchService) {
+  }
 
   ngOnInit() {
   }
@@ -38,6 +39,11 @@ export class HeaderComponent implements OnInit {
       input.value = this.removeTagFromInput(input.value, optTag);
     }
     this.searchService.search(input.value);
+  }
+
+  // TODO: funzt so irgendwie nicht...
+  remove(tag: Tag) {
+    this.searchService.remove(tag);
   }
 
   private removeTagFromInput(value: string, tag: string) {

@@ -16,41 +16,49 @@
 </header>
 -->
 
-<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bg-info sticky-top bd-navbar">
+<header class="navbar navbar-dark flex-column flex-md-row bg-info sticky-top">
   <a class="navbar-brand">Apps@HM</a>
   <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Apps@HM">
     <span class="fa fa-university fa-2x text-dark"></span>
   </a>
 
-  <div class="navbar-nav-scroll">
-    <ul class="navbar-nav bd-navbar-nav flex-row">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/someOtherPath">Apps</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/home/problem">Problem melden</a>
-      </li>
-    </ul>
+  <div class="navbar-nav flex-row">
+    <div class="nav-item ml-2">
+      <a class="nav-link" href="/home/apps">Home</a>
+    </div>
+    <!--
+        <div class="nav-item ml-2">
+          <a class="nav-link" href="/home/apps">Apps</a>
+        </div>
+    -->
+    <div class="nav-item ml-2">
+      <a class="nav-link" routerLink="/home/problem">Problem melden</a>
+    </div>
   </div>
 
 
-  <!-- TODO Breite der Suchleiste ist irgendwie bei meinem Umbau kaputt gegangen-->
-  <!--
-  Dies soll nur als Beispiel dienen
-  Die Tags sollten irgendwo rechts in der Suchleiste dargestellt werden. So wie im Mock.
-  Habe CSS zum Demozweck eingefügt, kannst komplett löschen.
-  -->
-  <div class="d-flex flex-row w-75 m-md-auto">
-    <div id="container" >
-      <input class="form-control w-100 mr-sm-2" type="search" placeholder="Search" aria-label="Search" #searchInput (keyup)="search(searchInput)">
-      <div id="click">
-        <div *ngFor="let tag of this.getTags()" class="d-inline-block">{{tag.text}}</div>
+  <!-- Search bar mit tags die rechts angefügt werden !-->
+  <div class="navbar-nav flex-row flex-grow-1 mx-2 align-items-center">
+    <div class="flex-grow-1 position-relative">
+      <input class="form-control w-100 mr-sm-2"
+             type="search"
+             placeholder="Search"
+             aria-label="Search"
+             #searchInput
+             (keyup)="search(searchInput)">
+      <div *ngIf="this.getTags().size > 0"
+           class="position-absolute d-flex flex-row-reverse tag-container">
+        <div class="tag btn-secondary ml-1"
+             *ngFor="let tag of this.getTags()">
+          <!--            TODO: funzt so irgendwie nicht...-->
+          <!--            (click)="remove(searchInput, tag)"-->
+
+          {{tag.text}}
+          <span>x</span>
+        </div>
       </div>
     </div>
-    <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    <button class="btn btn-success" type="submit">Search</button>
   </div>
 
   <div *ngIf="isLoggedIn(); else login">

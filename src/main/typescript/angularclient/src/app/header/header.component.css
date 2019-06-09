@@ -1,24 +1,13 @@
-<!--
-  TODO stolen from stackoverflow, please design in a better way^^
--->
 
-* {
-  box-sizing: border-box; /* gives padding and border from inside */
-}
-#container {
-  position: relative; /* for absolute child element */
-  display: inline-block; /* to take the width of the input */
-}
-input {
-  text-align: left;
-  width: 400px;
-  height: 30px; /* added to match the height of the #click div */
-  outline: 0; /* to remove outline when focused */
-}
-#click {
-  width: 100px;
-  height: 30px;
-  position: absolute; /* to align it to right and positon it over the input */
-  top: 0;
+.tag-container {
   right: 0;
+  margin-right: 2.5rem;
+  top: 25% !important;
+}
+
+.tag {
+  padding: .25rem .5rem;
+  font-size: .7rem;
+  line-height: 1.25;
+  border-radius: .2rem;
 }

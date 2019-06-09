@@ -2,7 +2,7 @@
 
   <app-vertical-app-list [apps]="this.sidebarApps" routerPrefix='/home/apps/'></app-vertical-app-list>
 
-  <div class="flex-grow-1 mx-4 shadow-lg overflow-auto">
+  <div class="flex-grow-1 mx-4 shadow-lg" style="overflow-y: auto;overflow-x:hidden">
     <div class="row">
       <!-- headline -->
       <div class="col-sm-12">
@@ -27,7 +27,8 @@
           </div>
           <div class="pb-3">
             <h5>Bilder</h5>
-            <div class="d-inline mr-2" id="images" *ngFor="let thumbnail of [1,2]"> <!-- TODO this.app.images, ggf. auch eigene images componente -->
+            <div class="d-inline mr-2" id="images" *ngFor="let thumbnail of [1,2]">
+              <!-- TODO this.app.images, ggf. auch eigene images componente -->
               <img src="https://via.placeholder.com/40"/>
             </div>
           </div>
@@ -49,7 +50,8 @@
           <div>
             <b>Bewertung: </b>
             <app-star-rating [rating]="this.app.rating" [overall]="5"></app-star-rating>
-            <button class="btn btn-primary px-3" (click)="add(tagid)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            <button class="btn btn-primary px-3" (click)="add(tagid)"><i class="fa fa-plus-circle"
+                                                                         aria-hidden="true"></i></button>
           </div>
         </div>
       </div>

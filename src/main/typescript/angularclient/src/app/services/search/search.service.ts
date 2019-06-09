@@ -18,6 +18,11 @@ export class SearchService {
     this.tags.add(tag);
   }
 
+  // TODO: funzt so irgendwie nicht...
+  remove(tag: Tag) {
+    this.tags.delete(tag)
+  }
+
   getLastSearchResults() {
     return this.apps;
   }
