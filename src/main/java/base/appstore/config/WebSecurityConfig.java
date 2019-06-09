@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/*.*").permitAll()
                 .antMatchers(HttpMethod.GET, "/apps/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/apps/**").permitAll() // required by angular http client (interceptor)
+                .antMatchers(HttpMethod.OPTIONS, "/problem/**").permitAll() // required by angular http client (interceptor)
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
