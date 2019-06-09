@@ -1,7 +1,7 @@
-<div class="shadow-lg ml-5 overflow-auto" style="width: 270px">
+<div id="fullheight" class="container shadow-lg ml-2 overflow-auto" style="height:100%; min-width: 320px">
   <div *ngFor="let app of this.apps">
 
-    <div class="card mb-3 shadow-sm" [routerLink]="[this.routerPrefix, app.id]">
+    <div class="card mt-2 shadow-sm" [routerLink]="[this.routerPrefix, app.id]">
       <div class="row no-gutters">
         <div class="col-md-4">
           <div class="text-center">

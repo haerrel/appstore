@@ -1,6 +1,5 @@
-<div class="contentContainer d-flex flex-row">
-  <div class="w-25"></div>
-  <div class="contentContainer w-50 mt-4">
+<div class="container d-flex flex-row" id="fullheight">
+  <div class="container h-100 mt-4 mx-auto">
     <div *ngIf="isSearchEmpty() && noTags(); else listSearchResults">
 
       <!-- Beliebtesten Apps -->
@@ -50,17 +49,13 @@
     </div>
 
     <ng-template #listSearchResults>
-      <div *ngFor="let app of this.getSearchApps()">
-        <app-appcard [app]="app"></app-appcard>
-      </div>
+      <diV class="d-flex flex-wrap shadow-lg">
+        <div *ngFor="let app of this.getSearchApps()">
+          <app-appcard [app]="app"></app-appcard>
+        </div>
+      </diV>
     </ng-template>
 
   </div>
 
 </div>
-<!--
-<div class="shadow-none p-3 mb-5 bg-light rounded">No shadow</div>
-<div class="shadow-sm p-3 mb-5 bg-white rounded">Small shadow</div>
-<div class="shadow p-3 mb-5 bg-white rounded">Regular shadow</div>
-<div class="shadow-lg p-3 mb-5 bg-white rounded">Larger shadow</div>
--->

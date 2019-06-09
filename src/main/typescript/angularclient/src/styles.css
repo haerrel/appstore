@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+.checked {
+  color: orange;
+}
+
+html {
+  height: 100%;
+}
+
+* { padding: 0; margin: 0; }
+html, body, #fullheight {
+  min-height: 90% !important;
+  height: 95%;
+}
