@@ -6,6 +6,7 @@ import {App} from '../../shared/app';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../auth/auth.service';
 import {Tag} from '../../shared/tag';
+import {Problem} from '../../shared/problem';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,21 @@ export class BackendService {
 
   getApps(searchPrefix: string, tags: Set<Tag>) {
     return this.http.get<App[]>(this.endpoint + 'apps?search=' + searchPrefix + '&tags=' + Array.from(tags).map(tag => tag.text).join(','));
+  }
+
+  reportProblem(problem: Problem) {
+    return this.http.post(this.endpoint + 'problem', problem, {});
+  }
+
+  getProblems() {
+    return this.http.get<Problem[]>(this.endpoint + 'problem');
+  }
+
+  deleteProblem(id: number) {
+    return this.http.delete(this.endpoint + 'problem/' + id, {});
+  }
+
+  getProblem(id: number) {
+    return this.http.get<Problem>(this.endpoint + 'problem/' + id, {});
   }
 }

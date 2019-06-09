@@ -1,0 +1,28 @@
+<div class="pt-4 d-flex flex-row">
+  <div class="flex-grow-1">
+    <div class="container">
+      <div class="row">
+        <!-- headline -->
+        <div class="col-sm-12">
+          <h1 class="d-inline-block align-middle mr-2">Problem melden</h1>
+        </div>
+      </div>
+      <hr>
+      <div class="container-fluid">
+        <div class="form-group">
+          <label class="custom-control-label">Name</label>
+          <input class="form-control" type="text" [(ngModel)]="this.problem.name">
+        </div>
+        <div class="form-group">
+          <label class="custom-control-label">E-Mail-Adresse</label>
+          <input class="form-control" type="text" [(ngModel)]="this.problem.email">
+        </div>
+        <div class="form-group">
+          <label class="custom-control-label">Problembeschreibung</label>
+          <textarea class="form-control" style="resize: none" rows="4" [(ngModel)]="this.problem.description"></textarea>
+        </div>
+        <button class="btn btn-primary btn-success" (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

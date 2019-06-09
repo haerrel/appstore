@@ -7,6 +7,9 @@ import {NewAppComponent} from './routes/root/user/new-app/new-app.component';
 import {EditAppComponent} from './routes/root/user/edit-app/edit-app.component';
 import {UserComponent} from './routes/root/user/user.component';
 import {AppDetailsComponent} from './routes/root/app-details/app-details.component';
+import {ReportProblemComponent} from './routes/root/report-problem/report-problem.component';
+import {ShowProblemComponent} from './routes/root/show-problem/show-problem.component';
+import {ShowAllProblemsComponent} from './routes/root/show-all-problems/show-all-problems.component';
 
 const routes: Routes = [
   {
@@ -18,7 +21,8 @@ const routes: Routes = [
     path: 'home', component: RootComponent,
     children: [
       {path: 'apps', component: HomeComponent},
-      {path: 'apps/:id', component: AppDetailsComponent}
+      {path: 'apps/:id', component: AppDetailsComponent},
+      {path: 'problem', component: ReportProblemComponent}
     ]
   },
   {
@@ -31,6 +35,8 @@ const routes: Routes = [
           {path: ':id', component: EditAppComponent}
         ]
       },
+      {path: 'problem', component: ShowAllProblemsComponent},
+      {path: 'problem/:id', component: ShowProblemComponent}
     ]
   },
   { path: 'login', component: LoginComponent},

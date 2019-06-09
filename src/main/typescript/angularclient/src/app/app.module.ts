@@ -19,6 +19,9 @@ import { EditAppComponent } from './routes/root/user/edit-app/edit-app.component
 import { AppDetailsComponent } from './routes/root/app-details/app-details.component';
 import { StarRatingComponent } from './mixins/star-rating/star-rating.component';
 import { VerticalAppListComponent } from './mixins/vertical-app-list/vertical-app-list.component';
+import { ReportProblemComponent } from './routes/root/report-problem/report-problem.component';
+import { ShowProblemComponent } from './routes/root/show-problem/show-problem.component';
+import { ShowAllProblemsComponent } from './routes/root/show-all-problems/show-all-problems.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { VerticalAppListComponent } from './mixins/vertical-app-list/vertical-ap
     EditAppComponent,
     AppDetailsComponent,
     StarRatingComponent,
-    VerticalAppListComponent
+    VerticalAppListComponent,
+    ReportProblemComponent,
+    ShowProblemComponent,
+    ShowAllProblemsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,29 @@
+<div class="pt-4 d-flex flex-row">
+  <div class="flex-grow-1">
+    <div class="container">
+      <div class="row">
+        <!-- headline -->
+        <div class="col-sm-12">
+          <h1 class="d-inline-block align-middle mr-2">Gemeldete Probleme</h1>
+        </div>
+      </div>
+      <hr>
+      <div class="container-fluid">
+        <button class="btn btn-primary px-3 mb-3" routerLink="../"><i class="fa fa-arrow-circle-left mr-4" aria-hidden="true"></i>Zurück zur Übersicht</button>
+        <div class="form-group">
+          <label class="custom-control-label">Name</label>
+          <input readonly class="form-control" type="text" [(ngModel)]="this.problem.name">
+        </div>
+        <div class="form-group">
+          <label class="custom-control-label">E-Mail-Adresse</label>
+          <input readonly class="form-control" type="text" [(ngModel)]="this.problem.email">
+        </div>
+        <div class="form-group">
+          <label class="custom-control-label">Problembeschreibung</label>
+          <textarea readonly class="form-control" style="resize: none" rows="4" [(ngModel)]="this.problem.description"></textarea>
+        </div>
+        <button (click)="delete()" class="btn btn-danger px-3 mb-3"><i class="fa fa-trash mr-4" aria-hidden="true"></i>Lösche Meldung</button>
+      </div>
+    </div>
+  </div>
+</div>
