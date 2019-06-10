@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import * as moment from 'moment';
 import * as jwt_decode from 'jwt-decode';
 import {environment} from '../../../environments/environment';
+import {Role} from '../../shared/role';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,18 @@ export class AuthService {
 
   getUsername() {
     return localStorage.getItem('username');
+  }
+
+  getRole(): Role {
+    const role = localStorage.getItem('role');
+    switch (role) {
+      case 'ROLE_ADMIN':
+        return Role.ADMIN;
+      case 'ROLE_DEVELOPER':
+        return Role.DEVELOPER;
+      default:
+        return null;
+    }
   }
 
 }

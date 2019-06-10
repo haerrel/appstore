@@ -3,6 +3,7 @@ import {AuthService} from '../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {SearchService} from '../services/search/search.service';
 import {Tag} from '../shared/tag';
+import {Role} from '../shared/role';
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,10 @@ export class HeaderComponent implements OnInit {
 
   getUsername(): string {
     return this.authService.getUsername();
+  }
+
+  isAdmin(): boolean {
+    return this.authService.getRole() === Role.ADMIN;
   }
 
   search(input) {
