@@ -48,11 +48,8 @@
              (keyup)="search(searchInput)">
       <div *ngIf="this.getTags().size > 0"
            class="position-absolute d-flex flex-row-reverse tag-container">
-        <div class="tag btn-secondary ml-1"
-             *ngFor="let tag of this.getTags()">
-          <!--            TODO: funzt so irgendwie nicht...-->
-          <!--            (click)="remove(searchInput, tag)"-->
-
+        <div class="tag btn btn-secondary ml-1"
+             *ngFor="let tag of this.getTags()" (click)="remove(tag)">
           {{tag.text}}
           <span>x</span>
         </div>
