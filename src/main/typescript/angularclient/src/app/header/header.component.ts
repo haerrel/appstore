@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit {
     this.searchService.search(input.value);
   }
 
-  // TODO: funzt so irgendwie nicht...
   remove(tag: Tag) {
     this.searchService.remove(tag);
   }
