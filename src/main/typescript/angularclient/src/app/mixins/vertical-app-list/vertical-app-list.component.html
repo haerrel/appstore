@@ -3,10 +3,8 @@
 
     <div class="card mt-2 shadow-sm" [routerLink]="[this.routerPrefix, app.id]">
       <div class="row no-gutters">
-        <div class="col-md-4">
-          <div class="text-center">
-            <img [src]="app.thumbnail" class="card-img" alt="">
-          </div>
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+          <img [src]="app.thumbnail" class="card-img" alt="" style="inline-size: 80px">
         </div>
         <div class="col-md-8">
           <div class="card-body">
