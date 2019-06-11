@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       loginPromise
         .then(() => {
           this.toastr.success('You´ve successfully logged in!', 'Login');
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/home/apps');
         })
         .catch((err) => {
           this.toastr.error('Your login was invalid!', 'Login');

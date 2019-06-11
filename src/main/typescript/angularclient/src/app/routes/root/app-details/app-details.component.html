@@ -5,10 +5,10 @@
   <div class="flex-grow-1 mx-4 shadow-lg" style="overflow-y: auto;overflow-x:hidden">
     <div class="row">
       <!-- headline -->
-      <div class="col-sm-12">
-        <h1 class="d-inline-block align-middle mr-2">{{this.app.title}}</h1>
-        <img class="d-inline-block align-middle mr-2" [src]="this.app.thumbnail" width="60" height="60"/>
-        <a class="d-inline-block align-middle mr-2" [href]="this.app.link">
+      <div class="col-sm-12 d-flex justify-content-between align-items-center">
+        <h1 class="ml-3">{{this.app.title}}</h1>
+        <img [src]="this.app.thumbnail" width="60" height="60"/>
+        <a class="mr-3" [href]="this.app.link">
           Hier gehts zur App
           <i class="fa fa-external-link" aria-hidden="true"></i>
         </a>
