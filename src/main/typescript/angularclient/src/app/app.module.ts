@@ -22,6 +22,7 @@ import { VerticalAppListComponent } from './mixins/vertical-app-list/vertical-ap
 import { ReportProblemComponent } from './routes/root/report-problem/report-problem.component';
 import { ShowProblemComponent } from './routes/root/show-problem/show-problem.component';
 import { ShowAllProblemsComponent } from './routes/root/show-all-problems/show-all-problems.component';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ShowAllProblemsComponent } from './routes/root/show-all-problems/show-a
     ShowAllProblemsComponent
   ],
   imports: [
+    MDBBootstrapModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
