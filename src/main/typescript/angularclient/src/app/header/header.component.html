@@ -18,13 +18,13 @@
 
 <header class="navbar navbar-dark flex-column flex-md-row bg-info sticky-top">
   <a class="navbar-brand">Apps@HM</a>
-  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Apps@HM">
+  <a class="navbar-brand mr-0 mr-md-2" routerLink="/home/apps" aria-label="Apps@HM">
     <span class="fa fa-university fa-2x text-dark"></span>
   </a>
 
   <div class="navbar-nav flex-row">
     <div class="nav-item ml-2">
-      <a class="nav-link" href="/home/apps">Home</a>
+      <a class="nav-link" routerLink="/home/apps">Home</a>
     </div>
     <!--
         <div class="nav-item ml-2">
@@ -59,38 +59,30 @@
   </div>
 
   <div *ngIf="isLoggedIn(); else login">
-    <!-- TODO dropdown war irgendwie nicht droppable, deswegen hab ich das hier mal auskommentiert das die Menu-Items zugänglich sind-->
-    <!--<div class="dropdown">-->
-      <!--<button class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-        <!--{{getUsername()}}-->
-      <!--</button>-->
+    <div class="dropdown" mdbDropdown>
 
-      <!--<div aria-labelledby="dropdownMenuButton"> &lt;!&ndash; class="dropdown-menu"&ndash;&gt;-->
+      <a mdbDropdownToggle mdbBtn color="warning"
+         class="waves-light dropdown-toggle"
+         type="button"
+         mdbWavesEffect>
+        <span class="fa fa-user fa-1x mr-1"></span>
+        {{getUsername()}}
+      </a>
 
-      <!--</div>-->
-    <!---->
-      <div class="dropdown" mdbDropdown>
-
-        <a mdbDropdownToggle mdbBtn color="primary" class="dropdown-toggle waves-light" type="button"
-           mdbWavesEffect>
-          {{getUsername()}}
-        </a>
-
-        <div class="dropdown-menu dropdown-primary">
-          <h6 class="dropdown-header">Developer Tasks</h6>
-          <a class="dropdown-item" routerLink="/user/myapps/new">Neue App</a>
-          <a class="dropdown-item" routerLink="/user/myapps/new">App editieren</a>
-          <div *ngIf="this.isAdmin()">
-            <h6 class="dropdown-header">Admin Tasks</h6>
-            <a class="dropdown-item" href="#">Probleme anzeigen</a>
-          </div>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" routerLink="/login" (click)="logout()">Logout</a>
+      <div class="dropdown-menu dropdown-primary">
+        <h6 class="dropdown-header">Developer Tasks</h6>
+        <a class="dropdown-item" routerLink="/user/myapps/new">Neue App</a>
+        <a class="dropdown-item" routerLink="/user/myapps">App editieren</a>
+        <div *ngIf="this.isAdmin()">
+          <h6 class="dropdown-header">Admin Tasks</h6>
+          <a class="dropdown-item" routerLink="/user/problem">Probleme anzeigen</a>
         </div>
-
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" routerLink="/login" (click)="logout()">Logout</a>
       </div>
     </div>
-  <!--</div>-->
+  </div>
+
   <ng-template #login>
     <a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" routerLink="/login">Login</a>
   </ng-template>

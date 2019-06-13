@@ -58,7 +58,6 @@ export class HeaderComponent implements OnInit {
     return this.searchService.getTags();
   }
 
-
   private extractTag(input) {
     const m = input.indexOf('#');
     const n = input.indexOf(' ', m);

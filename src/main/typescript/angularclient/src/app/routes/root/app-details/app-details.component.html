@@ -3,7 +3,7 @@
   <app-vertical-app-list [apps]="this.sidebarApps" routerPrefix='/home/apps/'></app-vertical-app-list>
 
   <div class="flex-grow-1 mx-4 shadow-lg" style="overflow-y: auto;overflow-x:hidden">
-    <div class="row">
+    <div class="row mt-3">
       <!-- headline -->
       <div class="col-sm-12 d-flex justify-content-between align-items-center">
         <h1 class="ml-3">{{this.app.title}}</h1>
@@ -14,7 +14,7 @@
         </a>
       </div>
     </div>
-    <hr>
+    <div class="dropdown-divider"></div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6">

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {BackendService} from '../../../../services/Backend/backend.service';
 import {App} from '../../../../shared/app';
-import {ToastrService} from 'ngx-toastr';
 import {Tag} from '../../../../shared/tag';
+import {MyToastrService} from "../../../../services/toast/my-toastr.service";
 
 @Component({
   selector: 'app-new-app',
@@ -14,8 +14,10 @@ export class NewAppComponent implements OnInit {
   tags: Array<string> = [];
   text: string;
   title: string;
+  link: string;
+  price: string;
 
-  constructor(private backend: BackendService, private toastr: ToastrService) { }
+  constructor(private backend: BackendService, private toastr: MyToastrService) { }
 
   ngOnInit() {
   }
@@ -58,5 +60,17 @@ export class NewAppComponent implements OnInit {
       });
     });
   }
+
+  extract(input) {
+    const m = input.value.indexOf('#');
+    const n = input.value.indexOf(' ', m);
+    if (m !== -1 && n !== -1 && m < n) {
+      const tag = input.value.substring(m + 1, n);
+      this.tags.push(tag);
+      input.value = input.value.replace(`#${tag} `, '');
+    }
+    return null;
+  }
+
 
 }

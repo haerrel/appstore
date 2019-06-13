@@ -1,13 +1,9 @@
 
-.tag-container {
-  right: 0;
-  margin-right: 2.5rem;
-  top: 3px !important;
-}
-
-.tag {
-  padding: .25rem .5rem;
-  font-size: .7rem;
-  line-height: 1.25;
-  border-radius: .2rem;
+.dropdown-item:hover {
+  transition: all .1s linear;
+  background-color: #4285f4 !important;
+  border-radius: .125rem;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+  color: #fff !important;
+  text-decoration: none;
 }

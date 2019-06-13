@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {BackendService} from '../../../../services/Backend/backend.service';
 import {App} from '../../../../shared/app';
 import {Tag} from '../../../../shared/tag';
-import {ToastrService} from 'ngx-toastr';
+import {MyToastrService} from "../../../../services/toast/my-toastr.service";
 
 @Component({
   selector: 'app-edit-app',
@@ -15,7 +15,7 @@ export class EditAppComponent implements OnInit {
   app: App = new App();
   images: Array<string> = [];
 
-  constructor(private route: ActivatedRoute, private backend: BackendService, private toastr: ToastrService) { }
+  constructor(private route: ActivatedRoute, private backend: BackendService, private toastr: MyToastrService) { }
 
   ngOnInit() {
     this.refreshForm();

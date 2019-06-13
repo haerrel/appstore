@@ -1,9 +1,9 @@
-<div class="pt-4 d-flex flex-row">
+<div class="pt-4 d-flex flex-row" id="fullheight">
 
   <app-vertical-app-list [apps]="this.apps" routerPrefix='/user/myapps/'></app-vertical-app-list>
 
   <!-- right side || Detail-->
-  <div class="flex-grow-1">
+  <div class="flex-grow-1 mx-4 shadow-lg" style="overflow-y: auto;overflow-x:hidden">
     <router-outlet></router-outlet>
   </div>
 </div>

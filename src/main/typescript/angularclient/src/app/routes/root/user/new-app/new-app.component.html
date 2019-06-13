@@ -1,48 +1,61 @@
-<div class="contentContainer d-flex flex-column w-25">
-  <div class="form-group">
-    <label class="custom-control-label">App-Name</label>
-    <input class="form-control" type="text" [(ngModel)]="this.title">
-  </div>
-  <div class="form-group">
-    <label class="custom-control-label">Thumbnail</label>
-    <input #thumbnailInput class="form-control-file" type="file" accept="thumbnail/x-png,thumbnail/gif,thumbnail/jpeg"/>
-  </div>
-  <div class="form-group">
-    <label class="custom-control-label">Link</label>
-    <input class="form-control" type="text"/>
-  </div>
-  <div class="form-group">
-    <label class="custom-control-label">Bilder</label>
-    <input class="form-control" type="text"/>
-    <label class="custom-control-label">Tags</label>
-    <input class="form-control" type="text"/>
-    <button class="btn btn-primary" (click)="addTag(tagid)">Add</button>
-    <div *ngFor="let image of images; let i = index">
-      #{{image}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
-                                             (click)="images.splice(i,1)"></i></span>
+<div class="container-fluid">
+  <div class="row mt-5">
+
+    <div class="col-sm-6">
+
+      <div class="form-group">
+        <label>App-Name</label>
+        <input class="form-control" type="text" placeholder="Beispiel Name" [(ngModel)]="this.title">
+      </div>
+
+      <div class="form-group">
+        <label>Beschreibung</label>
+        <input class="form-control" type="text" [(ngModel)]="this.text"/>
+      </div>
+
+      <div class="form-group">
+        <label>Tags</label>
+        <div class="position-relative">
+          <input class="form-control"
+                 type="text"
+                 placeholder="#exampleTag"
+                 #searchInput
+                 (keyup)="extract(searchInput)">
+          <div *ngIf="this.tags.length > 0"
+               class="position-absolute d-flex flex-row-reverse tag-container">
+            <div class="tag btn btn-secondary ml-1"
+                 *ngFor="let tag of this.tags; let i = index" (click)="this.tags.splice(i, 1)">
+              {{tag}}
+              <span>x</span>
+            </div>
+          </div>
+        </div>
+        <small class="form-text text-muted">Beginne mit '#' und mit jedem Leerzeichen wird ein Tag erzeugt.</small>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+
+      <div class="form-group">
+        <label>Thumbnail</label>
+        <input #thumbnailInput class="form-control-file" type="file"
+               accept="thumbnail/x-png,thumbnail/gif,thumbnail/jpeg"/>
+      </div>
+
+      <div class="form-group">
+        <label>Link</label>
+        <input class="form-control" type="text" placeholder="www.hm.edu" [(ngModel)]="this.link"/>
+      </div>
+
+      <div class="form-group">
+        <label>Zum Entwickler</label>
+        <input class="form-control" type="text"/>
+      </div>
     </div>
 
   </div>
-  <div class="form-group">
-    <label class="custom-control-label">Beschreibung</label>
-    <input class="form-control" type="text" [(ngModel)]="this.text"/>
-  </div>
-  <div class="form-group">
-    <label class="custom-control-label">Zum Entwickler</label>
-    <input class="form-control" type="text"/>
-  </div>
-  <div class="form-group">
-    <label class="custom-control-label">Tags</label>
-    <div class="d-flex flex-row">
-      <input class="form-control mr-sm-2" type="text" #tagid/>
-      <button class="btn btn-primary px-3" (click)="addTag(tagid)"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-      </button>
 
-    </div>
-    <div *ngFor="let tag of tags; let i = index">
-      #{{tag}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
-                                           (click)="tags.splice(i,1)"></i></span>
-    </div>
-  </div>
-  <button class="btn btn-primary success" (click)="postApp(thumbnailInput)">New App</button>
+  <div class="dropdown-divider"></div>
+  <button class="btn btn-success float-right mr-3" (click)="postApp(thumbnailInput)">New App</button>
 </div>

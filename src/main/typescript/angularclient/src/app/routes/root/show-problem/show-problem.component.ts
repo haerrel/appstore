@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Problem} from '../../../shared/problem';
 import {BackendService} from '../../../services/Backend/backend.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
+import {MyToastrService} from "../../../services/toast/my-toastr.service";
 
 @Component({
   selector: 'app-show-problem',
@@ -13,7 +13,7 @@ export class ShowProblemComponent implements OnInit {
 
   problem = new Problem();
 
-  constructor(private route: ActivatedRoute, private backend: BackendService, private toastr: ToastrService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private backend: BackendService, private toastr: MyToastrService, private router: Router) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
