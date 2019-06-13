@@ -38,7 +38,7 @@
           </div>
           <div class="pb-3">
             <h5>Zum Entwickler</h5>
-            <p>{{this.app.developer}}</p> <!-- TODO this.app.developer not served by backend -->
+            <p><!--{{this.app.developer}}--></p> <!-- TODO this.app.developer not served by backend -->
           </div>
           <div class="pb-3">
             <h5>Datum der Veröffentlichung</h5>
@@ -50,7 +50,7 @@
           <div>
             <b>Bewertung: </b>
             <app-star-rating [rating]="3" [overall]="5"></app-star-rating>
-            <button class="btn btn-primary px-3" (click)="add(tagid)"><i class="fa fa-plus-circle"
+            <button class="btn btn-primary px-3"><i class="fa fa-plus-circle"
                                                                          aria-hidden="true"></i></button>
           </div>
         </div>
