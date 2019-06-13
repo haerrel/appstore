@@ -9,18 +9,25 @@
       </div>
       <hr>
       <div class="container-fluid">
-        <div class="card" *ngFor="let problem of this.problems; let i = index">
-          <div class="card-body">
-            <div class="d-inline-block align-middle mr-2">
-              <h6 class="card-title mb-0 text-truncate" data-toggle="tooltip" attr.title="{{problem.name}}">{{problem.email}}</h6>
-              <p class="card-text text-truncate" style="max-width: 300px" data-toggle="tooltip"  attr.title="{{problem.description}}">{{problem.description}}</p>
-            </div>
-            <div class="d-inline-block align-middle float-sm-right">
-              <button class="btn btn-primary btn-red px-3 mr-2" routerLink="./{{problem.id}}" title="Details"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
-              <button class="btn btn-danger px-3" (click)="deleteProblem(problem.id, i)" title="Löschen"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        <div *ngIf="this.problems && this.problems.length > 0; else listProblems">
+          <div class="card" *ngFor="let problem of this.problems; let i = index">
+            <div class="card-body">
+              <div class="d-inline-block align-middle mr-2">
+                <h6 class="card-title mb-0 text-truncate" data-toggle="tooltip" attr.title="{{problem.name}}">{{problem.email}}</h6>
+                <p class="card-text text-truncate" style="max-width: 300px" data-toggle="tooltip"  attr.title="{{problem.description}}">{{problem.description}}</p>
+              </div>
+              <div class="d-inline-block align-middle float-sm-right">
+                <button class="btn btn-primary px-3 mr-2" routerLink="./{{problem.id}}" title="Details"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+                <button class="btn btn-danger px-3" (click)="deleteProblem(problem.id, i)" title="Löschen"><i class="fa fa-trash" aria-hidden="true"></i></button>
+              </div>
             </div>
           </div>
         </div>
+        <ng-template #listProblems>
+          <div>
+            Es wurden keine Probleme gemeldet
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

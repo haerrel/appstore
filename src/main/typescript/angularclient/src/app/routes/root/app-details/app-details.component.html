@@ -5,10 +5,10 @@
   <div class="flex-grow-1 mx-4 shadow-lg" style="overflow-y: auto;overflow-x:hidden">
     <div class="row mt-3">
       <!-- headline -->
-      <div class="col-sm-12 d-flex justify-content-between align-items-center">
+      <div class="col-sm-12 d-flex align-items-center">
         <h1 class="ml-3">{{this.app.title}}</h1>
-        <img [src]="this.app.thumbnail" width="60" height="60"/>
-        <a class="mr-3" [href]="this.app.link">
+        <img class="ml-3" [src]="this.app.thumbnail" width="60" height="60"/>
+        <a class="ml-3" [href]="this.app.link">
           Hier gehts zur App
           <i class="fa fa-external-link" aria-hidden="true"></i>
         </a>
@@ -49,7 +49,7 @@
           <!-- COLUMN 2 -->
           <div>
             <b>Bewertung: </b>
-            <app-star-rating [rating]="this.app.rating" [overall]="5"></app-star-rating>
+            <app-star-rating [rating]="3" [overall]="5"></app-star-rating>
             <button class="btn btn-primary px-3" (click)="add(tagid)"><i class="fa fa-plus-circle"
                                                                          aria-hidden="true"></i></button>
           </div>

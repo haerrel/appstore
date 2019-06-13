@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {SearchService} from '../services/search/search.service';
@@ -11,6 +11,8 @@ import {Role} from '../shared/role';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
+  @ViewChild('searchInput') searchInput;
 
   constructor(private authService: AuthService, private router: Router, private searchService: SearchService) {
   }
@@ -35,15 +37,15 @@ export class HeaderComponent implements OnInit {
     return this.authService.getRole() === Role.ADMIN;
   }
 
-  search(input) {
-    const optTag = this.extractTag(input.value);
+  search() {
+    const optTag = this.extractTag(this.searchInput.nativeElement.value);
     if (optTag) {
       const newTag = new Tag();
       newTag.text = optTag;
       this.searchService.addTag(newTag);
-      input.value = this.removeTagFromInput(input.value, optTag);
+      this.searchInput.nativeElement.value = this.removeTagFromInput(this.searchInput.nativeElement.value, optTag);
     }
-    this.searchService.search(input.value);
+    this.searchService.search(this.searchInput.nativeElement.value);
   }
 
   remove(tag: Tag) {
@@ -67,4 +69,8 @@ export class HeaderComponent implements OnInit {
     return null;
   }
 
+  searchButtonClick() {
+    this.search();
+    this.router.navigateByUrl('/home/apps');
+  }
 }

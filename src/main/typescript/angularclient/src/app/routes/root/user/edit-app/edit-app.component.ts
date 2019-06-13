@@ -12,8 +12,8 @@ import {MyToastrService} from "../../../../services/toast/my-toastr.service";
 })
 export class EditAppComponent implements OnInit {
 
+  submitEnabled = true;
   app: App = new App();
-  images: Array<string> = [];
 
   constructor(private route: ActivatedRoute, private backend: BackendService, private toastr: MyToastrService) { }
 
@@ -37,6 +37,19 @@ export class EditAppComponent implements OnInit {
     });
   }
 
+  extract(input) {
+    const m = input.value.indexOf('#');
+    const n = input.value.indexOf(' ', m);
+    if (m !== -1 && n !== -1 && m < n) {
+      const tagText = input.value.substring(m + 1, n);
+      const newTag = new Tag();
+      newTag.text = tagText;
+      this.app.tags.push(newTag);
+      input.value = input.value.replace(`#${tagText} `, '');
+    }
+    return null;
+  }
+
   getApp(appId: number) {
     if (appId) {
       this.backend.getApp(appId).subscribe(res => {
@@ -45,10 +58,29 @@ export class EditAppComponent implements OnInit {
     }
   }
 
-  submit() {
+  loadThumbnail(thumbnailInput) {
+    this.submitEnabled = false;
+    const file = thumbnailInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (evt: any) => {
+        const thumbData = evt.target.result;
+        this.app.thumbnail = thumbData;
+        this.submitEnabled = true;
+      };
+      reader.onerror = (evt: any) => {
+        this.toastr.error('Unable to read file', 'Thumbnail');
+        this.submitEnabled = true;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  submit(thumbnailInput) {
     this.backend.putApp(this.app).subscribe((res: App) => {
       this.toastr.success(`App updated, ID=${res.id}`, 'App');
-      this.getApp(res.id);
+      // this.getApp(res.id);
+      window.location.reload(); // TODO sonst wird sidebar nicht aktualisiert
     });
   }
 }

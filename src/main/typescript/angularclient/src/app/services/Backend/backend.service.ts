@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {App} from '../../shared/app';
 import {environment} from '../../../environments/environment';
@@ -70,5 +70,13 @@ export class BackendService {
 
   getProblem(id: number) {
     return this.http.get<Problem>(this.endpoint + 'problem/' + id, {});
+  }
+
+  getAppsById(ids: Array<number>): Observable<App[]> {
+    const requests = [];
+    ids.forEach(id => {
+      requests.push(this.getApp(id));
+    });
+    return forkJoin(requests);
   }
 }

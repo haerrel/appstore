@@ -119,6 +119,7 @@ public class AppController {
             app.setText(input.getText());
             app.setTags(input.getTags());
             app.setLink(input.getLink());
+            app.setThumbnail(input.getThumbnail());
             return appRepository.save(app);
         }).orElseGet(() ->
             create(input)

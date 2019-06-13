@@ -12,7 +12,7 @@ import {MyToastrService} from "../../../../services/toast/my-toastr.service";
 export class NewAppComponent implements OnInit {
 
   tags: Array<string> = [];
-  text: string;
+  description: string;
   title: string;
   link: string;
   price: string;
@@ -46,7 +46,7 @@ export class NewAppComponent implements OnInit {
     // TODO form validation here
     this.loadThumbnail(thumbnailInput.files[0], (thumbData) => {
       const app = new App();
-      app.text = this.text;
+      app.text = this.description;
       app.title = this.title;
       app.price = 3; // TODO add field to html-form
       app.thumbnail = thumbData;

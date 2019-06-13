@@ -1,8 +1,8 @@
 <div class="row mt-3">
   <!-- headline -->
-  <div class="col-sm-12 d-flex justify-content-between align-items-center">
-    <h1 class="ml-3">{{this.app.title}}</h1>
-    <img [src]="this.app.thumbnail" width="60" height="60"/>
+  <div class="col-sm-12 d-flex align-items-center">
+    <h1 class="mx-3">{{this.app.title}}</h1>
+    <img class="mr-3" [src]="this.app.thumbnail" width="60" height="60"/>
     <a class="mr-3" [href]="this.app.link">
       Hier gehts zur App
       <i class="fa fa-external-link" aria-hidden="true"></i>
@@ -12,62 +12,76 @@
 <div class="dropdown-divider"></div>
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-4">
-
-      <div class="form-group">
-        <label>App-Name</label>
-        <input class="form-control" type="text" [(ngModel)]="this.app.title"/>
-      </div>
-      <div class="form-group">
-        <label>Thumbnail</label>
-        <input class="form-control" type="text"/>
-      </div>
-      <div class="form-group">
-        <label>Link</label>
-        <input class="form-control" type="text" [(ngModel)]="this.app.link"/> <!-- TODO backend has to serve link -->
-      </div>
-      <div class="form-group">
-        <label>Images</label>
-        <div class="d-flex flex-row">
-          <input class="form-control mr-sm-2" type="text" #imagesInput/>
-          <button class="btn btn-primary px-3" (click)="addTag(imagesInput)"><i class="fa fa-plus-circle"
-                                                                                aria-hidden="true"></i>
-          </button>
-        </div>
-        <div *ngFor="let image of [this.app.images]; let i = index">
-          <!-- TODO workaround, backend has to serve a array of tags -->
-          {{image}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
-                                                (click)="this.app.images.splice(i,1)"></i></span>
+  <div class="mt-4 mb-4">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>App-Name</label>
+          <input class="form-control" type="text" [(ngModel)]="this.app.title"/>
         </div>
       </div>
-      <div class="form-group">
-        <label>Beschreibung</label>
-        <input class="form-control" type="text" [(ngModel)]="this.app.text"/>
-      </div>
-      <div class="form-group">
-        <label>Zum Entwickler</label>
-        <input class="form-control" type="text"/>
-      </div>
-      <div class="form-group">
-        <label>Tags</label>
-        <div class="d-flex flex-row">
-          <input class="form-control mr-sm-2" type="text" #tagInput/>
-          <button class="btn btn-primary px-3" (click)="addTag(tagInput)"><i class="fa fa-plus-circle"
-                                                                             aria-hidden="true"></i>
-          </button>
-        </div>
-        <div *ngFor="let tag of this.app.tags; let i = index">
-          #{{tag.text}} <span style="color: red"><i class="fa fa-minus-circle red" style="font-size:24px"
-                                                    (click)="this.app.tags.splice(i,1)"></i></span>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Thumbnail</label>
+          <input #thumbnailInput class="form-control-file" (change)="loadThumbnail(thumbnailInput)" type="file"
+                 accept="thumbnail/x-png,thumbnail/gif,thumbnail/jpeg"/>
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-6">
 
-    <div class="col-sm-8"></div>
+        <div class="form-group">
+          <label>Beschreibung</label>
+          <input class="form-control" type="text" [(ngModel)]="this.app.text"/>
+        </div>
+      </div>
 
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Link</label>
+          <input class="form-control" type="text" [(ngModel)]="this.app.link"/> <!-- TODO backend has to serve link -->
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+
+      <div class="col-sm-6">
+
+        <div class="form-group">
+          <label>Tags</label>
+          <div class="position-relative">
+            <input class="form-control"
+                   type="text"
+                   placeholder="#exampleTag"
+                   #searchInput
+                   (keyup)="extract(searchInput)">
+            <div *ngIf="this.app.tags && this.app.tags.length > 0"
+                 class="position-absolute d-flex flex-row-reverse tag-container">
+              <div class="tag btn btn-secondary ml-1"
+                   *ngFor="let tag of this.app.tags; let i = index" (click)="this.app.tags.splice(i, 1)">
+                {{tag.text}}
+                <span>x</span>
+              </div>
+            </div>
+          </div>
+          <small class="form-text text-muted">Beginne mit '#' und mit jedem Leerzeichen wird ein Tag erzeugt.</small>
+        </div>
+
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="form-group">
+          <label>Zum Entwickler</label>
+          <input class="form-control" type="text"/>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <div class="dropdown-divider"></div>
-  <button class="btn btn-primary btn-success  float-right mr-3" (click)="submit()">Save Changes</button>
+  <button [disabled]="!this.submitEnabled" class="btn btn-primary btn-success  float-right mr-3" (click)="submit(thumbnailInput)">Save Changes</button>
 </div>

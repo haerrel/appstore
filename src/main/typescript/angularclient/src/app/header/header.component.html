@@ -45,7 +45,7 @@
              placeholder="Search"
              aria-label="Search"
              #searchInput
-             (keyup)="search(searchInput)">
+             (change)="search()" (keyup)="search()">
       <div *ngIf="this.getTags().size > 0"
            class="position-absolute d-flex flex-row-reverse tag-container">
         <div class="tag btn btn-secondary ml-1"
@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-success" type="submit">Search</button>
+    <button class="btn btn-success" type="submit" (click)="searchButtonClick(searchInput)">Search</button>
   </div>
 
   <div *ngIf="isLoggedIn(); else login">

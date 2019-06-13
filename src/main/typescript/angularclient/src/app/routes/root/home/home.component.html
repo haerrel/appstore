@@ -9,7 +9,7 @@
             <h3 class="font-weight-bold">Beliebtesten Apps</h3>
           </a>
         </div>
-        <button type="button" class="btn btn-success">Mehr ansehen</button>
+        <button type="button" class="btn btn-success" [routerLink]="['/home/apps',this.famousApps[0]?.id]" [queryParams]="getParams(this.famousApps)">Mehr ansehen</button>
       </div>
       <div class="d-flex m-3 mb-5 shadow bg-light overflow-auto">
         <div *ngFor="let app of this.famousApps">
@@ -24,7 +24,7 @@
             <h3 class="font-weight-bold">Neuesten Apps</h3>
           </a>
         </div>
-        <button type="button" class="btn btn-info">Mehr ansehen</button>
+        <button type="button" class="btn btn-info" [routerLink]="['/home/apps',this.newestApps[0]?.id]" [queryParams]="getParams(this.newestApps)">Mehr ansehen</button>
       </div>
       <div class="d-flex m-3 mb-5 shadow bg-light overflow-auto">
         <div *ngFor="let app of this.newestApps">
@@ -39,7 +39,7 @@
             <h3 class="font-weight-bold">Günstigste Apps</h3>
           </a>
         </div>
-        <button type="button" class="btn btn-warning">Mehr ansehen</button>
+        <button type="button" class="btn btn-warning" [routerLink]="['/home/apps',this.cheapestApps[0]?.id]" [queryParams]="getParams(this.cheapestApps)">Mehr ansehen</button>
       </div>
       <div class="d-flex shadow m-3 bg-light overflow-auto">
         <div *ngFor="let app of this.cheapestApps">

@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private backend: BackendService, private search: SearchService) { }
 
+  searchApps: App[] = [];
+
   famousApps: App[] = [];
   cheapestApps: App[] = [];
   newestApps: App[] = [];
@@ -39,4 +41,13 @@ export class HomeComponent implements OnInit {
   noTags() {
     return this.search.getTags().size === 0;
   }
+
+  sliceAndMapApps(apps: App[]) {
+    return apps.slice(1).map(app => app.id);
+  }
+
+  getParams(apps: App[]) {
+    return {apps: this.sliceAndMapApps(apps)};
+  }
 }
+
