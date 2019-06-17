@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {BackendService} from '../../../../services/Backend/backend.service';
 import {App} from '../../../../shared/app';
 import {Tag} from '../../../../shared/tag';
-import {MyToastrService} from "../../../../services/toast/my-toastr.service";
 import * as moment from 'moment';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-app',
@@ -18,7 +18,7 @@ export class NewAppComponent implements OnInit {
   link: string;
   price: string;
 
-  constructor(private backend: BackendService, private toastr: MyToastrService) { }
+  constructor(private backend: BackendService, private toastr: ToastrService) { }
 
   ngOnInit() {
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BackendService} from '../../../services/Backend/backend.service';
 import {Problem} from '../../../shared/problem';
-import {MyToastrService} from "../../../services/toast/my-toastr.service";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-show-all-problems',
@@ -12,7 +12,7 @@ export class ShowAllProblemsComponent implements OnInit {
 
   problems: Array<Problem> = [];
 
-  constructor(private backend: BackendService, private toastr: MyToastrService) { }
+  constructor(private backend: BackendService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.backend.getProblems().subscribe(problems => this.problems = problems);

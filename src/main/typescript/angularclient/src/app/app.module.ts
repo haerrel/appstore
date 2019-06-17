@@ -48,7 +48,10 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    }),
     FormsModule
   ],
   providers: [

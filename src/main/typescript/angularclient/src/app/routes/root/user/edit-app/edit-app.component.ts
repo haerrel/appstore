@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {BackendService} from '../../../../services/Backend/backend.service';
 import {App} from '../../../../shared/app';
 import {Tag} from '../../../../shared/tag';
-import {MyToastrService} from "../../../../services/toast/my-toastr.service";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-app',
@@ -15,7 +15,7 @@ export class EditAppComponent implements OnInit {
   submitEnabled = true;
   app: App = new App();
 
-  constructor(private route: ActivatedRoute, private backend: BackendService, private toastr: MyToastrService) { }
+  constructor(private route: ActivatedRoute, private backend: BackendService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.refreshForm();

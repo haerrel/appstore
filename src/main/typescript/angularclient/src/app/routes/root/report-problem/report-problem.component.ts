@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Problem} from '../../../shared/problem';
 import {BackendService} from '../../../services/Backend/backend.service';
-import {MyToastrService} from "../../../services/toast/my-toastr.service";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-report-problem',
@@ -12,7 +12,7 @@ export class ReportProblemComponent implements OnInit {
 
   problem = new Problem();
 
-  constructor(private backend: BackendService, private toastr: MyToastrService) { }
+  constructor(private backend: BackendService, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
