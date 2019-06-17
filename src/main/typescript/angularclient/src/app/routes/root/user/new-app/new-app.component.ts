@@ -3,6 +3,7 @@ import {BackendService} from '../../../../services/Backend/backend.service';
 import {App} from '../../../../shared/app';
 import {Tag} from '../../../../shared/tag';
 import {MyToastrService} from "../../../../services/toast/my-toastr.service";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-new-app',
@@ -44,18 +45,21 @@ export class NewAppComponent implements OnInit {
 
   postApp(thumbnailInput) {
     // TODO form validation here
+    var self = this;
     this.loadThumbnail(thumbnailInput.files[0], (thumbData) => {
-      const app = new App();
+      var app = new App();
       app.text = this.description;
       app.title = this.title;
       app.price = 3; // TODO add field to html-form
       app.thumbnail = thumbData;
-      this.tags.forEach(tag => {
+      app.tags = [];
+      app.datePublished = moment().format('YYYY-MM-DD');
+      self.tags.forEach(tag => {
         const newTag = new Tag();
         newTag.text = tag;
         app.tags.push(newTag);
       });
-      this.backend.postApp(app).subscribe((res: App) => {
+      self.backend.postApp(app).subscribe((res: App) => {
         this.toastr.success(`New App created, ID=${res.id}`, 'App');
       });
     });

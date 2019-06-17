@@ -77,10 +77,13 @@ export class EditAppComponent implements OnInit {
   }
 
   submit(thumbnailInput) {
+    this.submitEnabled = false;
     this.backend.putApp(this.app).subscribe((res: App) => {
       this.toastr.success(`App updated, ID=${res.id}`, 'App');
-      // this.getApp(res.id);
-      window.location.reload(); // TODO sonst wird sidebar nicht aktualisiert
+      this.getApp(res.id);
+      this.submitEnabled = true;
+      // window.location.reload(); // TODO sonst wird sidebar nicht aktualisiert
+      // das zerstört auf heroku alles^^
     });
   }
 }
