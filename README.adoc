@@ -1,30 +1,3 @@
-# Example AppStore 
+# AppStore 
 
-This guide is based on two examples to build REST services with Spring:
-
-- https://spring.io/guides/tutorials/bookmarks/
-- https://spring.io/guides/gs/rest-service/
-
-## REST Enpoints secured
-
-based on https://ertan-toker.de/spring-boot-spring-security-jwt-token/ 
-
-Added Role based authentication: roles are ROLE_DEVELOPER, ROLE_ADMIN
-
-== What you'll build
-
-You'll build a service that will accept CRUD (HTTP POST, HTTP GET, HTTP PUT, HTTP DELETE) requests at:
-
-----
-http://localhost:8080/apps
-----
-
-- GET http://localhost:8080/apps: lists all 'Apps' of the AppStore
-- GET http://localhost:8080/apps/{id}: lists the 'App' with the given {id}
-- POST http://localhost:8080/apps and in JSON Body title, text, tags: adds one 'App' to the AppStore
-- PUT http://localhost:8080/apps/{id} and in JSON Body title, text, tags: changes the 'App' with the given {id}
-- DELETE http://localhost:8080/apps/{id}: deletes the 'App' with the given {id}
-
-
-
-
+tbd
